@@ -39,13 +39,13 @@ if prompt := st.chat_input("Ask your question?"):
         full_response = ""
         assistant_response = chatwithme(prompt)
         # Simulate stream of response with milliseconds delay
-        for chunk in assistant_response.split():
-            full_response += chunk + " "
-            time.sleep(0.05)
-            # Add a blinking cursor to simulate typing
-            message_placeholder.markdown(full_response + "▌")
-        message_placeholder.markdown(full_response)
+        with st.spinner(text="Generating response..."):
+            for chunk in assistant_response.split():
+                full_response += chunk + " "
+                time.sleep(0.005)
+                # Add a blinking cursor to simulate typing
+                message_placeholder.markdown(full_response + "▌")
+            message_placeholder.markdown(full_response)
     # Add assistant response to chat history
-    with st.spinner(text="Generating response..."):
-        st.session_state.messages.append({"role": "assistant", "content": full_response})
+    st.session_state.messages.append({"role": "assistant", "content": full_response})
     ####
