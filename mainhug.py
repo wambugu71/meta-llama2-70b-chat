@@ -10,6 +10,11 @@ def chatwithme(prompt):
     return chatbot.chat(prompt)
     
 st.title("Meta llama2 70b chat")
+with st.sidebar:
+    st.markdown("__Developer:__ Wambugu kinyua")
+    st.markdown("__Email:__ kenliz1738@gmail.com")
+    st.markdown("The app is still in development it might break")
+    
 st.markdown(" `Dev k. WAMBUGU` ")
 # Initialize chat history
 if "messages" not in st.session_state:
