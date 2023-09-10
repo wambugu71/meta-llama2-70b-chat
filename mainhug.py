@@ -1,5 +1,6 @@
 from metallma2wambugu.huglogin import login
 import sys
+import os
 import time
 import streamlit as st
 def chatwithme(prompt):
@@ -7,7 +8,6 @@ def chatwithme(prompt):
     return chatbot.chat(prompt)
     
 st.title("Meta llama2 70b chat")
-
 # Initialize chat history
 if "messages" not in st.session_state:
     st.session_state.messages = []
