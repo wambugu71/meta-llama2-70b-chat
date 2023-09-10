@@ -4,7 +4,9 @@ import os
 import time
 import streamlit as st
 def chatwithme(prompt):
-    chatbot = login("kenliz1738@gmail.com","Wambugu71?").login()
+    email= os.environ["EMAIL"]
+    pass_w = os.environ["PASS"]
+    chatbot = login(email,pass_w).login()
     return chatbot.chat(prompt)
     
 st.title("Meta llama2 70b chat")
@@ -39,3 +41,8 @@ if prompt := st.chat_input("Ask your question?"):
         message_placeholder.markdown(full_response)
     # Add assistant response to chat history
     st.session_state.messages.append({"role": "assistant", "content": full_response})
+    st.markdown('''
+  <footer style="background-color: white; padding: 20px; text-align: left;">
+      <p style="font-size: 14px; color: #666; margin-bottom: 0; font-family:Chilanka;">Developer: k. wambugu </p>
+  </footer>
+  ''', unsafe_allow_html = True)
