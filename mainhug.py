@@ -46,6 +46,6 @@ if prompt := st.chat_input("Ask your question?"):
             message_placeholder.markdown(full_response + "▌")
         message_placeholder.markdown(full_response)
     # Add assistant response to chat history
-    with st.spinner:
+    with st.spinner(text="Generating response...):
         st.session_state.messages.append({"role": "assistant", "content": full_response})
     ####
