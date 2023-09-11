@@ -17,11 +17,11 @@ pip install streamlit
 
 - Meta llma2 is free and open source.
 #### What can llama2 do:
-> [x] Answer questions of any form. 
-> [x] Coding.
-> [x] Commercials use.
-> [x] Creativity in things like advertisements, post.
-> [x]  Able to reject offensive prompt.
-> [x] Has memory you can chat with as you would with human. 
+ [x] Answer questions of any form. 
+[x] Coding.
+[x] Commercials use.
+ [x] Creativity in things like advertisements, post.
+[x]  Able to reject offensive prompt.
+[x] Has memory you can chat with as you would with human. 
 
 __Note:__ The web app is still in development it might break, still in for testing.
