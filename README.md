@@ -1,6 +1,6 @@
 # Meta llama2 70b chat LLM 
 * Experience the power of llma2 70b chat model created by meta.
-To acess it [Here](https://wambugu1738metallama2.streamlit.app/).
+To acess it [Here](https://wambugukinyuai.streamlit.app/).
 > - Hugging face made this possible.
 ## Libraries used
 > 1. Hugchat install by:
