@@ -7,7 +7,7 @@ def chatwithme(prompt):
     email= os.environ["EMAIL"]
     pass_w = os.environ["PASS"]
     chatbot = login(email,pass_w).login()
-    return chatbot.query(f"{prompt}",temperature= 0.5, max_new_tokens= 4029)['text']#chatbot.chat(prompt)
+    return chatbot.query(prompt,temperature= 0.5, max_new_tokens= 4029)['text']#chatbot.chat(prompt)
     
 st.title("Meta llama2 70b chat")
 with st.sidebar:
