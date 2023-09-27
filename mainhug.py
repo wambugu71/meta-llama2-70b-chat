@@ -6,9 +6,15 @@ import streamlit as st
 def chatwithme(prompt):
     email= os.environ["EMAIL"]
     pass_w = os.environ["PASS"]
-    chatbot = login(email,pass_w).login()
+    #chatbot = login(email,pass_w).login()
+    sign = Login(email,pass_w)
+    cookies = sign.login()
+
+# Save cookies to the local directory
+    cookie_path_dir = "./cookies_snapshot"
+    sign.saveCookiesToDir(cookie_path_dir)
+    chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
     return chatbot.query(prompt,temperature= 0.5, max_new_tokens= 4029)['text']#chatbot.chat(prompt)
-    
 st.title("Meta llama2 70b chat")
 with st.sidebar:
     st.markdown("__Developer:__ Wambugu kinyua")
