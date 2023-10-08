@@ -63,11 +63,11 @@ if prompt := st.chat_input("Ask your question?"):
                     message_placeholder.markdown("### Sources on the web:")
                    # message_placeholder.markdown(source.link)
                     time.sleep(0.005)
-                    message_placeholder.markdown(f"Title: {source.title}")
+                    st.markdown(f"Title: {source.title}")
                     time.sleep(0.005)
-                    message_placeholder.markdown(f"<br>Source: {source.hostname}</br>")
+                    st.markdown(f"<br>Source: {source.hostname}</br>")
                     time.sleep(0.005)
-                    message_placeholder.markdown(f"Link: {source.link}")
+                    st.markdown(f"Link: {source.link}")
            # message_placeholder.markdown(full_response)
         # Add assistant response to chat history
         #st.markdown(
