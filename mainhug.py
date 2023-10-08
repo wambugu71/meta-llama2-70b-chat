@@ -52,11 +52,11 @@ if prompt := st.chat_input("Ask your question?"):
             assistant_response = chatwithme(prompt)['text']
             # Simulate stream of response with milliseconds delay
             #with st.spinner(text="Generating response..."):
-            for chunk in assistant_response.split():
-                full_response += chunk + " "
-                time.sleep(0.05)
+           #### for chunk in assistant_response.split():
+                ###full_response += chunk + " "
+               ### time.sleep(0.05)
                 # Add a blinking cursor to simulate typing
-                message_placeholder.code(full_response)# + "▌")
+            message_placeholder.code(full_response)# + "▌")
             if websearch:
                # st.markdown("### Sources on the web:")
                 for source in chatwithme(prompt).web_search_sources:
