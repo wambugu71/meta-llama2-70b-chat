@@ -17,8 +17,20 @@ def chatwithme(prompt):
     sign.saveCookiesToDir(cookie_path_dir)
     chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
     return chatbot.query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)
+
 st.title("Meta llama2-70b Chat")
-[st.markdown(i) for i in ["Hi😂", 23, 43, "hdhdb😊"]]
+def webs(res):
+    for source in res.web_search_sources:
+        #time.sleep(0.05)
+        st.markdown("### Essential sources on the web:")
+       # message_placeholder.markdown(source.link)
+        time.sleep(0.005)
+        st.markdown(f"Title: {source.title}")
+        time.sleep(0.005)
+        st.markdown(f"Source: {source.hostname}")
+        time.sleep(0.005)
+        st.markdown(f"Link: {source.link}")
+#[st.markdown(i) for i in ["Hi😂", 23, 43, "hdhdb😊"]]
 with st.sidebar:
     st.markdown("__Developer:__ Wambugu kinyua")
     st.markdown("__Email:__ kenliz1738@gmail.com")
@@ -57,19 +69,12 @@ if prompt := st.chat_input("Ask your question?"):
                 ###full_response += chunk + " "
                ### time.sleep(0.05)
                 # Add a blinking cursor to simulate typing
-            message_placeholder.markdown(assistant_response)# + "▌")
-            if websearch:
+            if websearch ==False:
+                message_placeholder.markdown(assistant_response)# + "▌")
+            if websearch== True:
+                message_placeholder.markdown(assistant_response + webs(chatwithme(prompt)))
                # st.markdown("### Sources on the web:")
-                for source in chatwithme(prompt).web_search_sources:
-                    #time.sleep(0.05)
-                    st.markdown("### Essential sources on the web:")
-                   # message_placeholder.markdown(source.link)
-                    time.sleep(0.005)
-                    st.markdown(f"Title: {source.title}")
-                    time.sleep(0.005)
-                    st.markdown(f"Source: {source.hostname}")
-                    time.sleep(0.005)
-                    st.markdown(f"Link: {source.link}")
+                
            # message_placeholder.markdown(full_response)
         # Add assistant response to chat history
         #st.markdown(
