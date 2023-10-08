@@ -73,5 +73,5 @@ if prompt := st.chat_input("Ask your question?"):
         # Add assistant response to chat history
         #st.markdown(
         st.session_state.messages.append({"role": "assistant", "content": full_response, "links": [i.link for i in chatwithme(prompt).web_search_sources]})
-        st.session_state.messages.append()
+       # st.session_state.messages.append()
     ####
