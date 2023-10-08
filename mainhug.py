@@ -60,12 +60,12 @@ if prompt := st.chat_input("Ask your question?"):
             if websearch:
                 for source in chatwithme(prompt).web_search_sources:
                     #time.sleep(0.05)
-                    message_placeholder.markdown("### Sources on the web:")
+                    st.markdown("### Sources on the web:")
                    # message_placeholder.markdown(source.link)
                     time.sleep(0.005)
                     st.markdown(f"Title: {source.title}")
                     time.sleep(0.005)
-                    st.markdown(f"<br>Source: {source.hostname}</br>")
+                    st.markdown(f"Source: {source.hostname}")
                     time.sleep(0.005)
                     st.markdown(f"Link: {source.link}")
            # message_placeholder.markdown(full_response)
