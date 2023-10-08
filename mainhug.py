@@ -18,7 +18,7 @@ def chatwithme(prompt):
     chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
     return chatbot.query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)
 st.title("Meta llama2-70b Chat")
-[st.markdown(i) for i in ["Hi😂", 23, 43, "hdhdb😊"])
+[st.markdown(i) for i in ["Hi😂", 23, 43, "hdhdb😊"]]
 with st.sidebar:
     st.markdown("__Developer:__ Wambugu kinyua")
     st.markdown("__Email:__ kenliz1738@gmail.com")
