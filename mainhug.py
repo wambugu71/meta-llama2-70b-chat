@@ -16,7 +16,7 @@ def chatwithme(prompt):
     cookie_path_dir = "./cookies_snapshot"
     sign.saveCookiesToDir(cookie_path_dir)
     chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
-    return chatbot.query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)['text']#chatbot.chat(prompt)
+    return chatbot.query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)
 st.title("Meta llama2-70b Chat")
 with st.sidebar:
     st.markdown("__Developer:__ Wambugu kinyua")
@@ -46,27 +46,28 @@ if prompt := st.chat_input("Ask your question?"):
 
     # Display assistant response in chat message container
     with st.chat_message("assistant"):
-        message_placeholder = st.empty()
-        full_response = ""
-        assistant_response = chatwithme(prompt)
-        # Simulate stream of response with milliseconds delay
-        #with st.spinner(text="Generating response..."):
-        for chunk in assistant_response.split():
-            full_response += chunk + " "
-            time.sleep(0.05)
-            # Add a blinking cursor to simulate typing
-            message_placeholder.markdown(full_response + "▌")
-        if websearch:
-            for source in chatwithme(prompt).web_search_sources:
+        with st.spinner("Generating response..."):
+            message_placeholder = st.empty()
+            full_response = ""
+            assistant_response = chatwithme(prompt)['text']
+            # Simulate stream of response with milliseconds delay
+            #with st.spinner(text="Generating response..."):
+            for chunk in assistant_response.split():
+                full_response += chunk + " "
                 time.sleep(0.05)
-                st.markdown("Sources on the web:")
-                message_placeholder(source.link + "▌ ")
-                time.sleep(0.05)
-                message_placeholder(source.title + "▌ ")
-                time.sleep(0.05)
-                message_placeholder(source.hostname+ "▌ ")
-       # message_placeholder.markdown(full_response)
-    # Add assistant response to chat history
-    #st.markdown(
+                # Add a blinking cursor to simulate typing
+                message_placeholder.markdown(full_response + "▌")
+            if websearch:
+                for source in chatwithme(prompt).web_search_sources:
+                    time.sleep(0.05)
+                    st.markdown("Sources on the web:")
+                    message_placeholder(source.link + "▌ ")
+                    time.sleep(0.05)
+                    message_placeholder(source.title + "▌ ")
+                    time.sleep(0.05)
+                    message_placeholder(source.hostname+ "▌ ")
+           # message_placeholder.markdown(full_response)
+        # Add assistant response to chat history
+        #st.markdown(
         st.session_state.messages.append({"role": "assistant", "content": full_response})
     ####
