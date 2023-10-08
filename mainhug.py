@@ -58,6 +58,7 @@ if prompt := st.chat_input("Ask your question?"):
                 # Add a blinking cursor to simulate typing
                 message_placeholder.markdown(full_response)# + "▌")
             if websearch:
+                st.markdown("### Sources on the web:")
                 for source in chatwithme(prompt).web_search_sources:
                     #time.sleep(0.05)
                     st.markdown("### Sources on the web:")
@@ -71,5 +72,6 @@ if prompt := st.chat_input("Ask your question?"):
            # message_placeholder.markdown(full_response)
         # Add assistant response to chat history
         #st.markdown(
-        st.session_state.messages.append({"role": "assistant", "content": full_response})
+        st.session_state.messages.append({"role": "assistant", "content": full_response, "links": [i.link for i in chatwithme(prompt).web_search_sources]})
+        st.session_state.messages.append()
     ####
