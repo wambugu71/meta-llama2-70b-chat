@@ -21,15 +21,14 @@ def chatwithme(prompt):
 st.title("Meta llama2-70b Chat")
 def webs(res):
     for source in res.web_search_sources:
-        #time.sleep(0.05)
-        st.markdown("### Essential sources on the web:")
+        return f"### Essential sources on the web: Title: {source.title} Source: {source.hostname} Link: {source.link}")
        # message_placeholder.markdown(source.link)
+      #  time.sleep(0.005)
+    #    st.markdown(f"Title: {source.title}")
+    #    time.sleep(0.005)
+      #  st.markdown(f"Source: {source.hostname}")
         time.sleep(0.005)
-        st.markdown(f"Title: {source.title}")
-        time.sleep(0.005)
-        st.markdown(f"Source: {source.hostname}")
-        time.sleep(0.005)
-        st.markdown(f"Link: {source.link}")
+     #   st.markdown(f"Link: {source.link}")
 #[st.markdown(i) for i in ["Hi😂", 23, 43, "hdhdb😊"]]
 with st.sidebar:
     st.markdown("__Developer:__ Wambugu kinyua")
