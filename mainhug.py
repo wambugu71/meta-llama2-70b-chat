@@ -59,13 +59,13 @@ if prompt := st.chat_input("Ask your question?"):
                 message_placeholder.markdown(full_response + "▌")
             if websearch:
                 for source in chatwithme(prompt).web_search_sources:
-                    time.sleep(0.05)
+                    #time.sleep(0.05)
                     st.markdown("Sources on the web:")
-                    message_placeholder(source.link + "▌ ")
+                    st.markdown(source.link + "▌ ")
                     time.sleep(0.05)
-                    message_placeholder(source.title + "▌ ")
+                    st.markdown(source.title + "▌ ")
                     time.sleep(0.05)
-                    message_placeholder(source.hostname+ "▌ ")
+                    st.markdown(source.hostname+ "▌ ")
            # message_placeholder.markdown(full_response)
         # Add assistant response to chat history
         #st.markdown(
