@@ -57,7 +57,7 @@ if prompt := st.chat_input("Ask your question?"):
             # Add a blinking cursor to simulate typing
             message_placeholder.markdown(full_response + "▌")
         if websearch:
-            for source in query_result.web_search_sources:
+            for source in chatwithme(prompt).web_search_sources:
                 st.markdown("Sources on the web:")
                 message_placeholder(source.link + "▌ ")
                 message_placeholder(source.title + "▌ ")
