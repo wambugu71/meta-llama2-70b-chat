@@ -5,7 +5,7 @@ from hugchat.login import Login
 import os
 import time
 import streamlit as st
-def chatwithme(prompt):
+def chatwithme():
     email= os.environ["EMAIL"]
     pass_w = os.environ["PASS"]
     #chatbot = login(email,pass_w).login()
@@ -16,12 +16,12 @@ def chatwithme(prompt):
     cookie_path_dir = "./cookies_snapshot"
     sign.saveCookiesToDir(cookie_path_dir)
     chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
-    return chatbot.query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)
+    return chatbot#.query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)
 
 st.title("Meta llama2-70b Chat")
-def webs(res):
-    for source in res.web_search_sources:
-        return f"### Essential sources on the web: Title: {source.title} Source: {source.hostname} Link: {source.link}"#)
+#def webs(res):
+ #   for source in res.web_search_sources:
+      #  return ### Essential sources on the web: Title: {source.title} Source: {source.hostname} Link: {source.link}"#)
        # message_placeholder.markdown(source.link)
       #  time.sleep(0.005)
     #    st.markdown(f"Title: {source.title}")
@@ -61,7 +61,7 @@ if prompt := st.chat_input("Ask your question?"):
         with st.spinner("Generating response..."):
             message_placeholder = st.empty()
             full_response = ""
-            assistant_response = chatwithme(prompt)['text']
+            assistant_response = chatwithme().query(prompt,temperature= 0.5, max_new_tokens= 4029)['text']#chatbot.chat(prompt)['text']
             # Simulate stream of response with milliseconds delay
             #with st.spinner(text="Generating response..."):
            #### for chunk in assistant_response.split():
@@ -71,7 +71,8 @@ if prompt := st.chat_input("Ask your question?"):
             if websearch ==False:
                 message_placeholder.markdown(assistant_response)# + "▌")
             if websearch== True:
-                message_placeholder.markdown(assistant_response + webs(chatwithme(prompt)))
+                assistant_response2 = chatwithme().query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)['text']
+                message_placeholder.markdown(assistant_response2['text']+ [st.markdown(f" ### Essential sources on the web: Title: {source.title} Source: {source.hostname} Link: {source.link}") for source in assistant_response2.web_search_sources] )
                # st.markdown("### Sources on the web:")
                 
            # message_placeholder.markdown(full_response)
