@@ -17,7 +17,11 @@ def chatwithme():
     sign.saveCookiesToDir(cookie_path_dir)
     chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
     return chatbot#.query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)
-
+def web_res(res):
+    new = [f" __source from the web:__ `Title:` {source.title} `Source:` {source.hostname} `Link:` {source.link}" for source in res.web_search_sources]
+    return new
+               # st.markdown("### Sources on the web:")
+                
 st.title("Meta llama2-70b Chat")
 #def webs(res):
  #   for source in res.web_search_sources:
@@ -71,10 +75,9 @@ if prompt := st.chat_input("Ask your question?"):
             if websearch ==False:
                 message_placeholder.markdown(assistant_response)# + "▌")
             if websearch== True:
-                assistant_response2 = chatwithme().query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)['text']
-                message_placeholder.markdown(assistant_response2['text']+ [st.markdown(f" ### Essential sources on the web: Title: {source.title} Source: {source.hostname} Link: {source.link}") for source in assistant_response2.web_search_sources] )
-               # st.markdown("### Sources on the web:")
-                
+                data = chatwithme().query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)['text']
+                assistant_response = data['text] + " ".join(web_res(data))
+                message_placeholder.markdown(assistant_response)
            # message_placeholder.markdown(full_response)
         # Add assistant response to chat history
         #st.markdown(
