@@ -76,7 +76,7 @@ if prompt := st.chat_input("Ask your question?"):
                 message_placeholder.markdown(assistant_response)# + "▌")
             if websearch== True:
                 data = chatwithme().query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)['text']
-                assistant_response = data['text'] + ' - '.join(web_res(data))
+                assistant_response = data['text'] + ' '.join(web_res(data))
                 message_placeholder.markdown(assistant_response)
            # message_placeholder.markdown(full_response)
         # Add assistant response to chat history
