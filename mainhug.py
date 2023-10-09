@@ -18,7 +18,7 @@ def chatwithme():
     chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
     return chatbot#.query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)
 def web_res(res):
-    new = [f" - [x] __source from the web:__ - `Title`:{source.title} - `source`: {source.hostname} - `Link`: {source.link}" for source in res.web_search_sources]
+    new = [f"- [x] __Source from the web:__ - `Title`:{source.title} - `source`: {source.hostname} - `Link`: {source.link}" for source in res.web_search_sources]
     return new
                # st.markdown("### Sources on the web:")
                 
