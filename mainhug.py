@@ -43,6 +43,16 @@ with st.sidebar:
     st.markdown("The app is still in development it might break")
     
 st.markdown(" `Dev k. WAMBUGU` ")
+from streamlit_custom_notification_box import custom_notification_box
+st.subheader("Component with constant args")
+
+styles = {'material-icons':{'color': 'red'},
+          'text-icon-link-close-container': {'box-shadow': '#3896de 0px 4px'},
+          'notification-text': {'':''},
+          'close-button':{'':''},
+          'link':{'':''}}
+
+custom_notification_box(icon='info', textDisplay='😂😂🤠We are almost done with your registration...', externalLink='more info', url='#', styles=styles, key="foo")
 # Initialize chat history
 websearch=st.checkbox("Web search?")
 #if websearch:
