@@ -97,5 +97,6 @@ try:
            # st.session_state.messages.append()
         ####
 except:
-    custom_notification_box(icon='info', textDisplay='Server error, try reprompting again', styles=styles, key ="foo")
-
+   # custom_notification_box(icon='info', textDisplay='Server error, try reprompting again', styles=styles, key ="foo")
+    custom_notification_box(icon='info', textDisplay='Server error, try reprompting again...', externalLink='more info', url='#', styles=styles, key="foo")
+# Initialize chat history
