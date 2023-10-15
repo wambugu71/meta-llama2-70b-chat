@@ -7,7 +7,7 @@ import time
 import streamlit as st
 
 
-@st.chache_data
+@st.cache_data
 def chatwithme():
     email= os.environ["EMAIL"]
     pass_w = os.environ["PASS"]
