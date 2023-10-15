@@ -68,7 +68,7 @@ if prompt := st.chat_input("Ask your question?"):
         with st.spinner("Generating response..."):
             message_placeholder = st.empty()
             full_response = ""
-            assistant_response = chatwithme.query(prompt,temperature= 0.5, max_new_tokens= 4029)['text']#chatbot.chat(prompt)['text']
+            assistant_response = chatwithme().query(prompt,temperature= 0.5, max_new_tokens= 4029)['text']#chatbot.chat(prompt)['text']
             # Simulate stream of response with milliseconds delay
             #with st.spinner(text="Generating response..."):
            #### for chunk in assistant_response.split():
@@ -78,7 +78,7 @@ if prompt := st.chat_input("Ask your question?"):
             if websearch ==False:
                 message_placeholder.markdown(assistant_response)# + "▌")
             if websearch== True:
-                data = chatwithme.query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)['text']
+                data = chatwithme().query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)['text']
                 assistant_response = data['text'] + ' '.join(web_res(data))
                 message_placeholder.markdown(assistant_response)
            # message_placeholder.markdown(full_response)
