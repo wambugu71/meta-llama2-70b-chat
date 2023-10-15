@@ -50,7 +50,7 @@ styles = {'material-icons':{'color': 'red'},
           'close-button':{'':''},
           'link':{'':''}}
 
-custom_notification_box(icon='info', textDisplay='😂😂🤠We are almost done with your registration...', externalLink='more info', url='#', styles=styles, key="foo")
+#custom_notification_box(icon='info', textDisplay='😂😂🤠We are almost done with your registration...', externalLink='more info', url='#', styles=styles, key="foo")
 # Initialize chat history
 try:
     websearch=st.checkbox("Web search?")
