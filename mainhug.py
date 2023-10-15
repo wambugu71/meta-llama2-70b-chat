@@ -5,7 +5,7 @@ from hugchat.login import Login
 import os
 import time
 import streamlit as st
-import logging
+#import logging
 #logging.basicConfig(level=logging.DEBUG)
 @st.cache_data
 def chatwithme():
@@ -25,7 +25,7 @@ def web_res(res):
     return new
                # st.markdown("### Sources on the web:")
                 
-st.title("Meta llama2-70b Chat")
+st.header("Meta llama2-70b Chat")
 #def webs(res):
  #   for source in res.web_search_sources:
       #  return ### Essential sources on the web: Title: {source.title} Source: {source.hostname} Link: {source.link}"#)
@@ -44,56 +44,58 @@ with st.sidebar:
     
 st.markdown(" `Dev k. WAMBUGU` ")
 from streamlit_custom_notification_box import custom_notification_box
-st.subheader("Component with constant args")
-
 styles = {'material-icons':{'color': 'red'},
-          'text-icon-link-close-container': {'box-shadow': '#3896de 0px 4px'},
+          'text-icon-link-close-container': {'box-shadow': '#3896de 0px 8px'},
           'notification-text': {'':''},
           'close-button':{'':''},
           'link':{'':''}}
 
 custom_notification_box(icon='info', textDisplay='😂😂🤠We are almost done with your registration...', externalLink='more info', url='#', styles=styles, key="foo")
 # Initialize chat history
-websearch=st.checkbox("Web search?")
-#if websearch:
- #   st.markdown("Web search enabled")
-if "messages" not in st.session_state:
-    st.session_state.messages = []
+try:
+    websearch=st.checkbox("Web search?")
+    #if websearch:
+     #   st.markdown("Web search enabled")
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
+    
+    # Display chat messages from history on app rerun
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
+    
+    # Accept user input
+    if prompt := st.chat_input("Ask your question?"):
+        # Add user message to chat history
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        # Display user message in chat message container
+        with st.chat_message("user"):
+            st.markdown(prompt)
+    
+        # Display assistant response in chat message container
+        with st.chat_message("assistant"):
+            with st.spinner("Generating response..."):
+                message_placeholder = st.empty()
+                full_response = ""
+                assistant_response = chatwithme().query(prompt,temperature= 0.5, max_new_tokens= 4029)['text']#chatbot.chat(prompt)['text']
+                # Simulate stream of response with milliseconds delay
+                #with st.spinner(text="Generating response..."):
+               #### for chunk in assistant_response.split():
+                    ###full_response += chunk + " "
+                   ### time.sleep(0.05)
+                    # Add a blinking cursor to simulate typing
+                if websearch ==False:
+                    message_placeholder.markdown(assistant_response)# + "▌")
+                if websearch== True:
+                    data = chatwithme().query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)['text']
+                    assistant_response = data['text'] + ' '.join(web_res(data))
+                    message_placeholder.markdown(assistant_response)
+               # message_placeholder.markdown(full_response)
+            # Add assistant response to chat history
+            #st.markdown(
+            st.session_state.messages.append({"role": "assistant", "content": assistant_response})
+           # st.session_state.messages.append()
+        ####
+except:
+    custom_notification_box(icon='info', textDisplay='Server error, try reprompting again', styles=styles, key ="foo")
 
-# Display chat messages from history on app rerun
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
-
-# Accept user input
-if prompt := st.chat_input("Ask your question?"):
-    # Add user message to chat history
-    st.session_state.messages.append({"role": "user", "content": prompt})
-    # Display user message in chat message container
-    with st.chat_message("user"):
-        st.markdown(prompt)
-
-    # Display assistant response in chat message container
-    with st.chat_message("assistant"):
-        with st.spinner("Generating response..."):
-            message_placeholder = st.empty()
-            full_response = ""
-            assistant_response = chatwithme().query(prompt,temperature= 0.5, max_new_tokens= 4029)['text']#chatbot.chat(prompt)['text']
-            # Simulate stream of response with milliseconds delay
-            #with st.spinner(text="Generating response..."):
-           #### for chunk in assistant_response.split():
-                ###full_response += chunk + " "
-               ### time.sleep(0.05)
-                # Add a blinking cursor to simulate typing
-            if websearch ==False:
-                message_placeholder.markdown(assistant_response)# + "▌")
-            if websearch== True:
-                data = chatwithme().query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)['text']
-                assistant_response = data['text'] + ' '.join(web_res(data))
-                message_placeholder.markdown(assistant_response)
-           # message_placeholder.markdown(full_response)
-        # Add assistant response to chat history
-        #st.markdown(
-        st.session_state.messages.append({"role": "assistant", "content": assistant_response})
-       # st.session_state.messages.append()
-    ####
