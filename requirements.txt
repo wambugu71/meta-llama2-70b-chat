@@ -1,3 +1,4 @@
 hugchat
+streamlit_custom_notification_box
 streamlit
 requests
