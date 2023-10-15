@@ -22,6 +22,7 @@ pip install streamlit
 - [x] Commercials use.
  - [x] Creativity in things like advertisements, post.
 - [x]  Able to reject offensive prompt.
-- [x] Has memory you can chat with as you would with human. 
+- [x] Has memory you can chat with as you would with human.
+- [ ] It is free.
 
 __Note:__ The web app is still in development it might break, still in for testing.
