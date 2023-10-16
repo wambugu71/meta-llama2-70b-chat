@@ -2,3 +2,6 @@ hugchat
 streamlit_custom_notification_box
 streamlit
 requests
+PyPDF2
+langchain
+hugchat 
