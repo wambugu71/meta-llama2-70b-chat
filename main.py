@@ -61,7 +61,7 @@ with st.sidebar:
     quiz_ans = st.checkbox("Question and answer?")
     if quiz_ans ==True:
         uploaded = st.file_uploader('Choose your .pdf file', type="pdf")
-        if uploaded_file is not None:
+        if uploaded is not None:
             text_ = read_pdf.read(uploaded)
 
     
