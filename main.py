@@ -119,6 +119,7 @@ try:
                     assistant_response = data['text'] + ' '.join(web_res(data))
                     message_placeholder.markdown(assistant_response)
                 if websearch == False and quiz_ans== True:
+                    st.subheader("Ask questions from your pdf")
                     assistant_response =question_pdf(llama_llm(email, psw),text_, prompt)
                     message_placeholder.markdown(assistant_response)
                 
