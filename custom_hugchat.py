@@ -44,7 +44,7 @@ class custom_chat(LLM):
     def _llm_type(self) -> str:
         return "Custom llm for llama2 HuggingChat api. Made by wambugu kinyua 🤠🥳"
 
-    @st.cache_data
+   # @st.cache_data
     def create_chatbot(self) -> None:
         if not any([self.email, self.psw, self.cookie_path]):
             raise ValueError("email, psw, or cookie_path is required.")
