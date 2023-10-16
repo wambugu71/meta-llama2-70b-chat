@@ -7,7 +7,8 @@ from typing import Any, List, Mapping, Optional
 from langchain.callbacks.manager import CallbackManagerForLLMRun
 from langchain.llms.base import LLM
 
-
+from hugchat import hugchat
+from hugchat.login import Login
 
 
 class custom_chat(LLM):
