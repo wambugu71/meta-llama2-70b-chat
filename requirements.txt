@@ -4,4 +4,4 @@ streamlit
 requests
 PyPDF2
 langchain
-hugchat 
+huggingface_hub
