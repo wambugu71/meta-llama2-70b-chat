@@ -62,7 +62,7 @@ with st.sidebar:
     if quiz_ans ==True:
         uploaded = st.file_uploader('Choose your .pdf file', type="pdf")
         if uploaded is not None:
-            text_ = read_pdf.read(uploaded)
+            text_ = read_pdf().read(uploaded)
 
     
     st.markdown("__Developer:__ Wambugu kinyua")
