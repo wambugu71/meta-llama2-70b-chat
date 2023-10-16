@@ -5,3 +5,4 @@ requests
 PyPDF2
 langchain
 huggingface_hub
+chromadb
