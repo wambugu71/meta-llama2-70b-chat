@@ -129,7 +129,8 @@ try:
             st.session_state.messages.append({"role": "assistant", "content": assistant_response})
            # st.session_state.messages.append()
         ####
-except:
+except Exception as e:
+    st.error(f"Error {e}")
    # custom_notification_box(icon='info', textDisplay='Server error, try reprompting again', styles=styles, key ="foo")
-    custom_notification_box(icon='info', textDisplay='Server error, try reprompting again...', externalLink='more info', url='#', styles=styles, key="foo")
+   # custom_notification_box(icon='info', textDisplay='Server error, try reprompting again...', externalLink='more info', url='#', styles=styles, key="foo")
 # Initialize chat history
