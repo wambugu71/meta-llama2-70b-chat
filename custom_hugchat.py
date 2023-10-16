@@ -6,7 +6,7 @@ from typing import Any, List, Mapping, Optional
 
 from langchain.callbacks.manager import CallbackManagerForLLMRun
 from langchain.llms.base import LLM
-
+import streamlit as st
 from hugchat import hugchat
 from hugchat.login import Login
 
@@ -44,7 +44,7 @@ class custom_chat(LLM):
     def _llm_type(self) -> str:
         return "Custom llm for llama2 HuggingChat api. Made by wambugu kinyua 🤠🥳"
 
-
+    @st.cache_data
     def create_chatbot(self) -> None:
         if not any([self.email, self.psw, self.cookie_path]):
             raise ValueError("email, psw, or cookie_path is required.")
