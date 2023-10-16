@@ -6,3 +6,4 @@ PyPDF2
 langchain
 huggingface_hub
 chromadb
+pysqlite3-binary
