@@ -1,3 +1,7 @@
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
 from metallma2wambugu.huglogin import login
 from langchain.embeddings import HuggingFaceHubEmbeddings
 from langchain.document_loaders import TextLoader
