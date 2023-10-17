@@ -38,6 +38,9 @@ st.header("Meta llama2-70b Chat")
      #   st.markdown(f"Link: {source.link}")
 #[st.markdown(i) for i in ["Hi😂", 23, 43, "hdhdb😊"]]
 with st.sidebar:
+    st.subheader("Acess real time response:")
+    
+    websearch=st.checkbox("Web search")
     st.markdown("__Developer:__ Wambugu kinyua")
     st.markdown("__Email:__ kenliz1738@gmail.com")
     st.markdown("The app is still in development it might break")
@@ -53,7 +56,7 @@ styles = {'material-icons':{'color': 'red'},
 #custom_notification_box(icon='info', textDisplay='😂😂🤠We are almost done with your registration...', externalLink='more info', url='#', styles=styles, key="foo")
 # Initialize chat history
 try:
-    websearch=st.checkbox("Web search?")
+#    websearch=st.checkbox("Web search?")
     #if websearch:
      #   st.markdown("Web search enabled")
     if "messages" not in st.session_state:
@@ -98,5 +101,5 @@ try:
         ####
 except:
    # custom_notification_box(icon='info', textDisplay='Server error, try reprompting again', styles=styles, key ="foo")
-    custom_notification_box(icon='info', textDisplay='Server error, try reprompting again...', externalLink='more info', url='#', styles=styles, key="foo")
+    st.error("server error handling your result, reprompt again")#(icon='info', textDisplay='Server error, try reprompting again...', externalLink='more info', url='#', styles=styles, key="foo")
 # Initialize chat history
