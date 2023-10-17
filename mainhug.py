@@ -7,8 +7,8 @@ import time
 import streamlit as st
 #import logging
 #logging.basicConfig(level=logging.DEBUG)
-@st.cache_data
-def chatwithme(model):
+@st.cache_data(experimental_allow_widgets=True)
+def chatwithme():
     email= os.environ["EMAIL"]
     pass_w = os.environ["PASS"]
         #chatbot = login(email,pass_w).login()
@@ -19,11 +19,32 @@ def chatwithme(model):
     cookie_path_dir = "./cookies_snapshot"
     sign.saveCookiesToDir(cookie_path_dir)
     chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
-    chatbot.switch_llm(model)
-    chatbot.new_conversation(switch_to =True)
+    option = st.selectbox(
+    'Choose your preferred model:',
+    ('Llama-2-70b-chat-hf', 'CodeLlama-34b-Instruct-hf', 'falcon-180B-chat', 'Mistral-7B-Instruct-v0.1'))
+    st.markdown(f'- You selected: _{option}_')
+    if option == 'Llama-2-70b-chat-hf':
+        chatbot.switch_llm(0)
+        chatbot.new_conversation(switch_to =True)
+        #chatbot = chatwithme(0)#new_conversation(switch_to =True)
+    elif option == "CodeLlama-34b-Instruct-hf":
+        chatbot.switch_llm(1)
+        chatbot.new_conversation(switch_to =True)#chatbot = chatwithme(1)#chatbot.switch_llm(1)
+        #chatbot.new_conversation(switch_to =True)
+    elif option == "falcon-180B-chat":
+        chatbot.switch_llm(2)
+        chatbot.new_conversation(switch_to =True)#chatbot = chatwithme(2)#chatbot.switch_llm(2)
+        #chatbot.new_conversation(switch_to =True)
+    elif option == "Mistral-7B-Instruct-v0.1":
+        chatbot.switch_llm(3)
+        chatbot.new_conversation(switch_to =True)#chatbot = chatwithme(3)#chatbot.switch_llm(3)
+        #chatbot.new_conversation(switch_to =True)
+    else:
+        st.markdown("Model not available!")
     #.query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)
     return chatbot
   #  return cookies 
+chatbot = chatwithme()
 def web_res(res):
     new = [f" - __Source from the web:__ - `Title`:{source.title} - `source`: {source.hostname}  `Link`: {source.link}" for source in res.web_search_sources]
     return new
@@ -32,24 +53,7 @@ chatbot = hugchat.ChatBot(cookies=chatwithme().get_dict())#.query(prompt,tempera
    # return chatbot
 st.header("Meta llama2-70b Chat")
 #st.markdown("")
-option = st.selectbox(
-    'Choose your preferred model:',
-    ('Llama-2-70b-chat-hf', 'CodeLlama-34b-Instruct-hf', 'falcon-180B-chat', 'Mistral-7B-Instruct-v0.1'))
-st.markdown(f'- You selected: _{option}_')
-if option == 'Llama-2-70b-chat-hf':
-    chatbot = chatwithme(0)#new_conversation(switch_to =True)
-elif option == "CodeLlama-34b-Instruct-hf":
-    chatbot = chatwithme(1)#chatbot.switch_llm(1)
-    #chatbot.new_conversation(switch_to =True)
-elif option == "falcon-180B-chat":
-    chatbot = chatwithme(2)#chatbot.switch_llm(2)
-    #chatbot.new_conversation(switch_to =True)
-elif option == "Mistral-7B-Instruct-v0.1":
-    chatbot = chatwithme(3)#chatbot.switch_llm(3)
-    #chatbot.new_conversation(switch_to =True)
-else:
-    st.markdown("Model not available!")
-    
+
     
 #def webs(res):
  #   for source in res.web_search_sources:
