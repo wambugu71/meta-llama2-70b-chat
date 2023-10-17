@@ -26,6 +26,12 @@ def web_res(res):
                # st.markdown("### Sources on the web:")
                 
 st.header("Meta llama2-70b Chat")
+#st.markdown("")
+option = st.selectbox(
+    'Choose your preferred model:',
+    ('Email', 'Home phone', 'Mobile phone'))
+
+st.write('You selected:', option)
 #def webs(res):
  #   for source in res.web_search_sources:
       #  return ### Essential sources on the web: Title: {source.title} Source: {source.hostname} Link: {source.link}"#)
