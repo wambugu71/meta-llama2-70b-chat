@@ -28,6 +28,6 @@ def question_pdf(llm, text, prompt):
     retriever = db.as_retriever()
     qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=retriever)
     #qa("what is data quality")
-    return  qa({"query": f"{prompt}"})['result']
+    return  qa({"query": f"{prompt}"})#['result']
     ####
     
