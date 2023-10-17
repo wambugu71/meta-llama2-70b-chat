@@ -1,5 +1,5 @@
 from PyPDF2 import PdfReader
-import streamlit as st
+#import streamlit as st
 class read_pdf:
     def __init__(self):
         super(read_pdf, self).__init__()
