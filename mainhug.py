@@ -18,13 +18,13 @@ def chatwithme():
     # Save cookies to the local directory
     cookie_path_dir = "./cookies_snapshot"
     sign.saveCookiesToDir(cookie_path_dir)
-    chatbot = hugchat.ChatBot(cookies=cookies.get_dict())#.query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)
-    return chatbot
+    return cookies 
 def web_res(res):
     new = [f" - __Source from the web:__ - `Title`:{source.title} - `source`: {source.hostname}  `Link`: {source.link}" for source in res.web_search_sources]
     return new
                # st.markdown("### Sources on the web:")
-                
+chatbot = hugchat.ChatBot(cookies=chatwithme().get_dict())#.query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)
+   # return chatbot
 st.header("Meta llama2-70b Chat")
 #st.markdown("")
 option = st.selectbox(
@@ -32,17 +32,17 @@ option = st.selectbox(
     ('Llama-2-70b-chat-hf', 'CodeLlama-34b-Instruct-hf', 'falcon-180B-chat', 'Mistral-7B-Instruct-v0.1'))
 st.markdown(f'- You selected: _{option}_')
 if option == 'Llama-2-70b-chat-hf':
-    chatwithme().switch_llm(0)
-    chatwithme().new_conversation(switch_to =True)
+    chatbot.switch_llm(0)
+    chatbot.new_conversation(switch_to =True)
 elif option == "CodeLlama-34b-Instruct-hf":
-    chatwithme().switch_llm(1)
-    chatwithme().new_conversation(switch_to =True)
+    chatbot.switch_llm(1)
+    chatbot.new_conversation(switch_to =True)
 elif option == "falcon-180B-chat":
-    chatwithme().switch_llm(2)
-    chatwithme().new_conversation(switch_to =True)
+    chatbot.switch_llm(2)
+    chatbot.new_conversation(switch_to =True)
 elif option == "Mistral-7B-Instruct-v0.1":
-    chatwithme().switch_llm(3)
-    chatwithme().new_conversation(switch_to =True)
+    chatbot.switch_llm(3)
+    chatbot.new_conversation(switch_to =True)
 else:
     st.markdown("Model not available!")
     
@@ -101,7 +101,7 @@ try:
             with st.spinner("Generating response..."):
                 message_placeholder = st.empty()
                 full_response = ""
-                assistant_response = chatwithme().query(prompt,temperature= 0.5, max_new_tokens= 4029)['text']#chatbot.chat(prompt)['text']
+                assistant_response = chatbot.query(prompt,temperature= 0.5, max_new_tokens= 4029)['text']#chatbot.chat(prompt)['text']
                 # Simulate stream of response with milliseconds delay
                 #with st.spinner(text="Generating response..."):
                #### for chunk in assistant_response.split():
@@ -111,7 +111,7 @@ try:
                 if websearch ==False:
                     message_placeholder.markdown(assistant_response)# + "▌")
                 if websearch== True:
-                    data = chatwithme().query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)['text']
+                    data = chatbot.query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)['text']
                     assistant_response = data['text'] + ' '.join(web_res(data))
                     message_placeholder.markdown(assistant_response)
                # message_placeholder.markdown(full_response)
