@@ -8,7 +8,7 @@ import streamlit as st
 #import logging
 #logging.basicConfig(level=logging.DEBUG)
 @st.cache_data
-def chatwithme():
+def chatwithme(model):
     email= os.environ["EMAIL"]
     pass_w = os.environ["PASS"]
         #chatbot = login(email,pass_w).login()
@@ -18,7 +18,12 @@ def chatwithme():
     # Save cookies to the local directory
     cookie_path_dir = "./cookies_snapshot"
     sign.saveCookiesToDir(cookie_path_dir)
-    return cookies 
+    chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
+    chatbot.switch_llm(model)
+    chatbot.new_conversation(switch_to =True)
+    #.query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)
+    return chatbot
+  #  return cookies 
 def web_res(res):
     new = [f" - __Source from the web:__ - `Title`:{source.title} - `source`: {source.hostname}  `Link`: {source.link}" for source in res.web_search_sources]
     return new
@@ -32,17 +37,16 @@ option = st.selectbox(
     ('Llama-2-70b-chat-hf', 'CodeLlama-34b-Instruct-hf', 'falcon-180B-chat', 'Mistral-7B-Instruct-v0.1'))
 st.markdown(f'- You selected: _{option}_')
 if option == 'Llama-2-70b-chat-hf':
-    chatbot.switch_llm(0)
-    chatbot.new_conversation(switch_to =True)
+    chatbot = chatwithme(0)#new_conversation(switch_to =True)
 elif option == "CodeLlama-34b-Instruct-hf":
-    chatbot.switch_llm(1)
-    chatbot.new_conversation(switch_to =True)
+    chatbot = chatwithme(1)#chatbot.switch_llm(1)
+    #chatbot.new_conversation(switch_to =True)
 elif option == "falcon-180B-chat":
-    chatbot.switch_llm(2)
-    chatbot.new_conversation(switch_to =True)
+    chatbot = chatwithme(2)#chatbot.switch_llm(2)
+    #chatbot.new_conversation(switch_to =True)
 elif option == "Mistral-7B-Instruct-v0.1":
-    chatbot.switch_llm(3)
-    chatbot.new_conversation(switch_to =True)
+    chatbot = chatwithme(3)#chatbot.switch_llm(3)
+    #chatbot.new_conversation(switch_to =True)
 else:
     st.markdown("Model not available!")
     
