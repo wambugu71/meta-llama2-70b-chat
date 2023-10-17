@@ -48,7 +48,7 @@ def web_res(res):
     return new
       
 
-@st.cache_data
+#@st.cache_data
 def llama_llm(email:str, psw:str):
     llm = custom_chat(email= email, psw= psw)
     return llm
