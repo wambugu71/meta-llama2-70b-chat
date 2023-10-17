@@ -29,9 +29,24 @@ st.header("Meta llama2-70b Chat")
 #st.markdown("")
 option = st.selectbox(
     'Choose your preferred model:',
-    ('Email', 'Home phone', 'Mobile phone'))
-
-st.write('You selected:', option)
+    ('Llama-2-70b-chat-hf', 'CodeLlama-34b-Instruct-hf', 'falcon-180B-chat', 'Mistral-7B-Instruct-v0.1'))
+st.markdown(f'- You selected: _{option}_')
+if option == 'Llama-2-70b-chat-hf':
+    chatwithme().switch_llm(0)
+    chatwithme().new_conversation(switch_to =True)
+elif option == "CodeLlama-34b-Instruct-hf":
+    chatwithme().switch_llm(1)
+    chatwithme().new_conversation(switch_to =True)
+elif option == "falcon-180B-chat":
+    chatwithme().switch_llm(2)
+    chatwithme().new_conversation(switch_to =True)
+elif option == "Mistral-7B-Instruct-v0.1":
+    chatwithme().switch_llm(3)
+    chatwithme().new_conversation(switch_to =True)
+else:
+    st.markdown("Model not available!")
+    
+    
 #def webs(res):
  #   for source in res.web_search_sources:
       #  return ### Essential sources on the web: Title: {source.title} Source: {source.hostname} Link: {source.link}"#)
