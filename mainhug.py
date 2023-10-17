@@ -49,7 +49,7 @@ def web_res(res):
     new = [f" - __Source from the web:__ - `Title`:{source.title} - `source`: {source.hostname}  `Link`: {source.link}" for source in res.web_search_sources]
     return new
                # st.markdown("### Sources on the web:")
-chatbot = hugchat.ChatBot(cookies=chatwithme().get_dict())#.query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)
+#chatbot = hugchat.ChatBot(cookies=chatwithme().get_dict())#.query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)
    # return chatbot
 st.header("Meta llama2-70b Chat")
 #st.markdown("")
