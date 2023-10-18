@@ -24,6 +24,8 @@ def chatwithme(model):
     chatbot.switch_llm(model)
     chatbot.new_conversation(switch_to =True)
     return chatbot
+    if os.environ["EMAIL"] or os.environ["PASS"] ==None:
+        st.error("Huggingface Login required!")
 logo = """ <header>
   <div class="container">
     <h1 class="logo"><a href="#">AI HUB</a></h1>
