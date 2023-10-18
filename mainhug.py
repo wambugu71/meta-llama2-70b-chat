@@ -23,8 +23,71 @@ def chatwithme(model):
     chatbot.switch_llm(model)
     chatbot.new_conversation(switch_to =True)
     return chatbot
+logo = """ <header>
+  <div class="container">
+    <h1 class="logo"><a href="#">AI HUB</a></h1>
+    <nav>
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
-st.header("Ai-hub")
+<style>
+  body {
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background-color: #3498db;
+  padding: 20px;
+  color: white;
+  text-align: center;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.logo {
+  float: left;
+  font-size: 24px;
+  line-height: 60px;
+}
+
+.logo a {
+  color: inherit;
+  text-decoration: none;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+nav li {
+  float: right;
+}
+
+nav a {
+  display: block;
+  padding: 10px 20px;
+  color: white;
+  text-decoration: none;
+}
+
+nav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+</style>
+"""
+st.markdown(logo, unsafe_allow_html=True)
 option = st.selectbox(
 'Choose your preferred model:',
 ('Llama-2-70b-chat-hf', 'CodeLlama-34b-Instruct-hf', 'falcon-180B-chat', 'Mistral-7B-Instruct-v0.1'))
