@@ -84,10 +84,19 @@ nav a:hover {
 }
 </style>
 """
+@st.cache_resource
+def login_data():
+    sign = Login(os.environ['EMAIL'], os.environ['PASS'])
+    cookies = sign.login()
+    return cookies
+    
 st.header("AI-Hub")
-def web_res(res):
+def web_search(cookies, prompt):
+    chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
+    res = chatbot.query(prompt, temperature=0.6, web_search=True)
     new = [f" - __Source from the web:__ - `Title`:{source.title} - `source`: {source.hostname}  `Link`: {source.link}" for source in res.web_search_sources]
-    return new
+    full_resp = res.text + ' '.join(new)
+    return full_resp
                # st.markdown("### Sources on the web:")
 #chatbot = hugchat.ChatBot(cookies=chatwithme().get_dict())#.query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)
    # return chatbot
@@ -199,8 +208,8 @@ try:
                 if websearch ==False:
                     message_placeholder.markdown(assistant_response)# + "▌")
                 if websearch== True:
-                    data = chatbot.query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)['text']
-                    assistant_response = data['text'] + ' '.join(web_res(data))
+                   # data = chatbot.query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)['text']
+                    assistant_response = web_search(login_data(),prompt)
                     message_placeholder.markdown(assistant_response)
                # message_placeholder.markdown(full_response)
             # Add assistant response to chat history
