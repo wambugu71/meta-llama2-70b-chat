@@ -125,10 +125,10 @@ with st.sidebar:
 #on = st.toggle("Enable model switching:")
 #if on:
 #    st.cache_data.clear()
+def clear():
+    st.cache_data.clear()
     
-option = st.selectbox(
-'Choose your preferred model:',on_change=st.cache_data.clear(),
-('Llama-2-70b-chat-hf', 'CodeLlama-34b-Instruct-hf', 'falcon-180B-chat', 'Mistral-7B-Instruct-v0.1'))
+option = st.selectbox('Choose your preferred model:',('Llama-2-70b-chat-hf', 'CodeLlama-34b-Instruct-hf', 'falcon-180B-chat', 'Mistral-7B-Instruct-v0.1'),on_change=clear)
 st.markdown(f'- You selected: _{option}_')
 if option == 'Llama-2-70b-chat-hf':
     
