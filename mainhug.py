@@ -213,7 +213,7 @@ try:
                     message_placeholder.markdown(assistant_response)# + "▌")
                 if websearch== True:
                    # data = chatbot.query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)['text']
-                    assistant_response = web_search(login_data(),prompt)
+                    assistant_response = web_search(prompt)
                     message_placeholder.markdown(assistant_response)
                # message_placeholder.markdown(full_response)
             # Add assistant response to chat history
