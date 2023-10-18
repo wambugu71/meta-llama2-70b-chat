@@ -121,33 +121,36 @@ with st.sidebar:
     st.markdown("__Developer:__ Wambugu kinyua")
     st.markdown("__Email:__ kenliz1738@gmail.com")
     st.markdown("The app is still in development it might break")
-
+on = st.toggle("Enable model switching:")
+if on:
+    st.cache_data.clear()
+    
 option = st.selectbox(
 'Choose your preferred model:',
 ('Llama-2-70b-chat-hf', 'CodeLlama-34b-Instruct-hf', 'falcon-180B-chat', 'Mistral-7B-Instruct-v0.1'))
 st.markdown(f'- You selected: _{option}_')
 if option == 'Llama-2-70b-chat-hf':
-    st.cache_data.clear()
+    
     chatbot = chatwithme(0)
     #chatbot.new_conversation(switch_to =True)
     #chatbot = chatwithme(0)#new_conversation(switch_to =True)
 elif option == "CodeLlama-34b-Instruct-hf":
-    st.cache_data.clear()
+   # st.cache_data.clear()
     chatbot  = chatwithme(1)
    # chatbot.new_conversation(switch_to =True)#chatbot = chatwithme(1)#chatbot.switch_llm(1)
     #chatbot.new_conversation(switch_to =True)
 elif option == "falcon-180B-chat":
-    st.cache_data.clear()
+    #st.cache_data.clear()
     chatbot  = chatwithme(2)
    # chatbot.new_conversation(switch_to =True)#chatbot = chatwithme(2)#chatbot.switch_llm(2)
     #chatbot.new_conversation(switch_to =True)
 elif option == "Mistral-7B-Instruct-v0.1":
-    st.cache_data.clear()
+    #st.cache_data.clear()
     chatbot  = chatwithme(3)
    # chatbot.new_conversation(switch_to =True)#chatbot = chatwithme(3)#chatbot.switch_llm(3)
     #chatbot.new_conversation(switch_to =True)
 else:
-    st.markdown("Model not available!")
+    #st.markdown("Model not available!")
 #.query(prompt
 st.markdown(" `Dev k. WAMBUGU` ")
 
