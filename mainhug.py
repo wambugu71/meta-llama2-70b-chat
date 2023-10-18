@@ -24,8 +24,8 @@ def chatwithme(model):
     chatbot.switch_llm(model)
     chatbot.new_conversation(switch_to =True)
     return chatbot
-    if os.environ["EMAIL"] or os.environ["PASS"] ==None:
-        st.error("Huggingface Login required!")
+   # if os.environ["EMAIL"] or os.environ["PASS"] ==None:
+   #     st.error("Huggingface Login required!")
 logo = """ <header>
   <div class="container">
     <h1 class="logo"><a href="#">AI HUB</a></h1>
@@ -108,8 +108,8 @@ def web_res(res):
 #[st.markdown(i) for i in ["Hi😂", 23, 43, "hdhdb😊"]]
 with st.sidebar:
     st.subheader("Acess real time response:")
-    os.environ["EMAIL"] = st.text_input("Enter your email")
-    os.environ["PASS"] = st.text_input("Enter your password", type="password")
+    email= st.text_input("Enter your email")
+    psw=st.text_input("Enter your password", type="password")
     if os.environ["EMAIL"] and os.environ["PASS"] !=None:
         st.success("Huggingface login successful.")
     else:
