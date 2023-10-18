@@ -86,13 +86,16 @@ nav a:hover {
 """
 #@st.cache_resource
 def login_data():
-    sign = Login(os.environ['EMAIL'], os.environ['PASS'])
-    cookies = sign.login()
+    
     return cookies
     
 st.header("AI-Hub")
 
-def web_search(cookies, prompt):
+def web_search(prompt):
+    sign = Login(os.environ['EMAIL'], os.environ['PASS'])
+    cookies = sign.login()
+    cookie_path_dir = "./cookies_snapshot1"
+    sign.saveCookiesToDir(cookie_path_dir)
     chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
     res = chatbot.query(prompt, temperature=0.6, web_search=True)
     new = [f" - __Source from the web:__ - `Title`:{source.title} - `source`: {source.hostname}  `Link`: {source.link}" for source in res.web_search_sources]
