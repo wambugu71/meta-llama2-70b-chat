@@ -121,12 +121,13 @@ with st.sidebar:
     st.markdown("__Developer:__ Wambugu kinyua")
     st.markdown("__Email:__ kenliz1738@gmail.com")
     st.markdown("The app is still in development it might break")
-on = st.toggle("Enable model switching:")
-if on:
-    st.cache_data.clear()
+#option_label=False
+#on = st.toggle("Enable model switching:")
+#if on:
+#    st.cache_data.clear()
     
 option = st.selectbox(
-'Choose your preferred model:',
+'Choose your preferred model:',on_change=st.cache_data.clear(),
 ('Llama-2-70b-chat-hf', 'CodeLlama-34b-Instruct-hf', 'falcon-180B-chat', 'Mistral-7B-Instruct-v0.1'))
 st.markdown(f'- You selected: _{option}_')
 if option == 'Llama-2-70b-chat-hf':
