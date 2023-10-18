@@ -96,7 +96,7 @@ def web_search(cookies, prompt):
     chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
     res = chatbot.query(prompt, temperature=0.6, web_search=True)
     new = [f" - __Source from the web:__ - `Title`:{source.title} - `source`: {source.hostname}  `Link`: {source.link}" for source in res.web_search_sources]
-    full_resp = f"{res["text"]} {' '.join(new)}"
+    full_resp = "{} {}".format(res["text"],' '.join(new))
     return full_resp
                # st.markdown("### Sources on the web:")
 #chatbot = hugchat.ChatBot(cookies=chatwithme().get_dict())#.query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)
