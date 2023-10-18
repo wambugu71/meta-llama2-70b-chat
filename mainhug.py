@@ -26,12 +26,6 @@ def chatwithme(model):
 logo = """ <header>
   <div class="container">
     <h1 class="logo"><a href="#">AI HUB</a></h1>
-    <nav>
-      <ul>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-    </nav>
   </div>
 </header>
 
@@ -87,34 +81,7 @@ nav a:hover {
 }
 </style>
 """
-st.markdown(logo, unsafe_allow_html=True)
-option = st.selectbox(
-'Choose your preferred model:',
-('Llama-2-70b-chat-hf', 'CodeLlama-34b-Instruct-hf', 'falcon-180B-chat', 'Mistral-7B-Instruct-v0.1'))
-st.markdown(f'- You selected: _{option}_')
-if option == 'Llama-2-70b-chat-hf':
-    chatbot = chatwithme(0)
-    #chatbot.new_conversation(switch_to =True)
-    #chatbot = chatwithme(0)#new_conversation(switch_to =True)
-elif option == "CodeLlama-34b-Instruct-hf":
-    chatbot  = chatwithme(1)
-   # chatbot.new_conversation(switch_to =True)#chatbot = chatwithme(1)#chatbot.switch_llm(1)
-    #chatbot.new_conversation(switch_to =True)
-elif option == "falcon-180B-chat":
-    chatbot  = chatwithme(2)
-   # chatbot.new_conversation(switch_to =True)#chatbot = chatwithme(2)#chatbot.switch_llm(2)
-    #chatbot.new_conversation(switch_to =True)
-elif option == "Mistral-7B-Instruct-v0.1":
-    chatbot  = chatwithme(3)
-   # chatbot.new_conversation(switch_to =True)#chatbot = chatwithme(3)#chatbot.switch_llm(3)
-    #chatbot.new_conversation(switch_to =True)
-else:
-    st.markdown("Model not available!")
-#.query(prompt
-
-
-
-
+st.header("AI-Hub")
 def web_res(res):
     new = [f" - __Source from the web:__ - `Title`:{source.title} - `source`: {source.hostname}  `Link`: {source.link}" for source in res.web_search_sources]
     return new
@@ -138,7 +105,12 @@ def web_res(res):
 #[st.markdown(i) for i in ["Hi😂", 23, 43, "hdhdb😊"]]
 with st.sidebar:
     st.subheader("Acess real time response:")
-    
+    os.environ["EMAIL"] = st.text_input("Enter your email")
+    os.environ["PASS"] = st.text_input("Enter your password", type="password")
+    if os.environ["EMAIL"] and os.environ["PASS"] !=None:
+        st.success("Huggingface login successful.")
+    else:
+        st.warn("Huggingface Login required to proceed")
     websearch=st.checkbox("Web search")
     st.markdown(" ")
     st.markdown(" ")
@@ -146,8 +118,32 @@ with st.sidebar:
     st.markdown("__Developer:__ Wambugu kinyua")
     st.markdown("__Email:__ kenliz1738@gmail.com")
     st.markdown("The app is still in development it might break")
-    
+
+option = st.selectbox(
+'Choose your preferred model:',
+('Llama-2-70b-chat-hf', 'CodeLlama-34b-Instruct-hf', 'falcon-180B-chat', 'Mistral-7B-Instruct-v0.1'))
+st.markdown(f'- You selected: _{option}_')
+if option == 'Llama-2-70b-chat-hf':
+    chatbot = chatwithme(0)
+    #chatbot.new_conversation(switch_to =True)
+    #chatbot = chatwithme(0)#new_conversation(switch_to =True)
+elif option == "CodeLlama-34b-Instruct-hf":
+    chatbot  = chatwithme(1)
+   # chatbot.new_conversation(switch_to =True)#chatbot = chatwithme(1)#chatbot.switch_llm(1)
+    #chatbot.new_conversation(switch_to =True)
+elif option == "falcon-180B-chat":
+    chatbot  = chatwithme(2)
+   # chatbot.new_conversation(switch_to =True)#chatbot = chatwithme(2)#chatbot.switch_llm(2)
+    #chatbot.new_conversation(switch_to =True)
+elif option == "Mistral-7B-Instruct-v0.1":
+    chatbot  = chatwithme(3)
+   # chatbot.new_conversation(switch_to =True)#chatbot = chatwithme(3)#chatbot.switch_llm(3)
+    #chatbot.new_conversation(switch_to =True)
+else:
+    st.markdown("Model not available!")
+#.query(prompt
 st.markdown(" `Dev k. WAMBUGU` ")
+
 from streamlit_custom_notification_box import custom_notification_box
 styles = {'material-icons':{'color': 'red'},
           'text-icon-link-close-container': {'box-shadow': '#3896de 0px 8px'},
