@@ -151,7 +151,7 @@ elif option == "Mistral-7B-Instruct-v0.1":
    # chatbot.new_conversation(switch_to =True)#chatbot = chatwithme(3)#chatbot.switch_llm(3)
     #chatbot.new_conversation(switch_to =True)
 else:
-    #st.markdown("Model not available!")
+    st.markdown("Model not available!")
 #.query(prompt
 st.markdown(" `Dev k. WAMBUGU` ")
 
