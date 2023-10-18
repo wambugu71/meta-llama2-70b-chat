@@ -5,8 +5,8 @@ from hugchat.login import Login
 import os
 import time
 import streamlit as st
-#import logging
-#logging.basicConfig(level=logging.DEBUG)
+import logging
+logging.basicConfig(level=logging.DEBUG)
 @st.cache_data#(experimental_allow_widgets=True)
 def chatwithme(model):
     email= os.environ["EMAIL"]
