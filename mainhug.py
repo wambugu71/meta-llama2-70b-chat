@@ -110,7 +110,7 @@ with st.sidebar:
     if os.environ["EMAIL"] and os.environ["PASS"] !=None:
         st.success("Huggingface login successful.")
     else:
-        st.warn("Huggingface Login required to proceed")
+        st.error("Huggingface Login required to proceed")
     websearch=st.checkbox("Web search")
     st.markdown(" ")
     st.markdown(" ")
