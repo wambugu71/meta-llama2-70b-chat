@@ -24,7 +24,7 @@ def chatwithme(model):
     chatbot.new_conversation(switch_to =True)
     return chatbot
 
-
+st.header("Ai-hub")
 option = st.selectbox(
 'Choose your preferred model:',
 ('Llama-2-70b-chat-hf', 'CodeLlama-34b-Instruct-hf', 'falcon-180B-chat', 'Mistral-7B-Instruct-v0.1'))
@@ -58,7 +58,7 @@ def web_res(res):
                # st.markdown("### Sources on the web:")
 #chatbot = hugchat.ChatBot(cookies=chatwithme().get_dict())#.query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)
    # return chatbot
-st.header("Meta llama2-70b Chat")
+
 #st.markdown("")
 
     
@@ -77,6 +77,9 @@ with st.sidebar:
     st.subheader("Acess real time response:")
     
     websearch=st.checkbox("Web search")
+    st.markdown(" ")
+    st.markdown(" ")
+    st.markdown(" ")
     st.markdown("__Developer:__ Wambugu kinyua")
     st.markdown("__Email:__ kenliz1738@gmail.com")
     st.markdown("The app is still in development it might break")
