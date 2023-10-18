@@ -8,7 +8,7 @@ from functools import lru_cache
 import streamlit as st
 #import logging
 #logging.basicConfig(level=logging.DEBUG)
-@lru_cache#(experimental_allow_widgets=True)
+@st.cache_resource#(experimental_allow_widgets=True)
 def chatwithme(model):
     email= os.environ["EMAIL"]
     pass_w = os.environ["PASS"]
