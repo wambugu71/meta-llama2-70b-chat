@@ -8,7 +8,7 @@ from functools import lru_cache
 import streamlit as st
 #import logging
 #logging.basicConfig(level=logging.DEBUG)
-@st.cache_data#(experimental_allow_widgets=True)
+@st.cache_resource#(experimental_allow_widgets=True)
 def chatwithme(model):
     email= os.environ["EMAIL"]
     pass_w = os.environ["PASS"]
@@ -139,7 +139,7 @@ with st.sidebar:
 #if on:
 #    st.cache_data.clear()
 def clear():
-    st.cache_data.clear()
+    st.cache_resource.clear()
     
 option = st.selectbox('Choose your preferred model:',('Llama-2-70b-chat-hf', 'CodeLlama-34b-Instruct-hf', 'falcon-180B-chat', 'Mistral-7B-Instruct-v0.1'),on_change=clear)
 st.markdown(f'- You selected: _{option}_')
