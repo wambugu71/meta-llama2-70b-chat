@@ -22,7 +22,7 @@ def chatwithme(model):
     chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
 #,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)
     chatbot.switch_llm(model)
-    chatbot.new_conversation(switch_to =True)
+    chatbot.new_conversation(switch_to =True, system_prompt="Your name is 'Wambugu kinyua AI', If you are greeted with hello, hey, how are you, etc your reply must have  'Hello welcome to Wambugu kinyua AI assistant, ask anything...'")
     return chatbot
    # if os.environ["EMAIL"] or os.environ["PASS"] ==None:
    #     st.error("Huggingface Login required!")
