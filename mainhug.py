@@ -107,7 +107,8 @@ def web_search(prompt):
 
 #st.markdown("")
 
-    
+websearch: bool = False #to a void an error.
+
 #def webs(res):
  #   for source in res.web_search_sources:
       #  return ### Essential sources on the web: Title: {source.title} Source: {source.hostname} Link: {source.link}"#)
