@@ -8,7 +8,7 @@ from functools import lru_cache
 import streamlit as st
 #import logging
 #logging.basicConfig(level=logging.DEBUG)
-@st.cache_resource#(experimental_allow_widgets=True)
+@st.cache_resource(show_spinner="Loading the model")#(experimental_allow_widgets=True)
 def chatwithme(model):
     email= os.environ["EMAIL"]
     pass_w = os.environ["PASS"]
@@ -121,6 +121,7 @@ def web_search(prompt):
 #[st.markdown(i) for i in ["Hi😂", 23, 43, "hdhdb😊"]]
 with st.sidebar:
     st.subheader("Acess real time response:")
+   '''
     email= st.text_input("Enter your email")
     psw=st.text_input("Enter your password", type="password")
     if os.environ["EMAIL"] and os.environ["PASS"] !=None:
@@ -131,9 +132,10 @@ with st.sidebar:
     st.markdown(" ")
     st.markdown(" ")
     st.markdown(" ")
+    '''
     st.markdown("__Developer:__ Wambugu kinyua")
     st.markdown("__Email:__ kenliz1738@gmail.com")
-    st.markdown("The app is still in development it might break")
+    st.markdown("__Note:__ The app is still in development it might break")
 #option_label=False
 #on = st.toggle("Enable model switching:")
 #if on:
