@@ -118,21 +118,8 @@ def web_search(prompt):
       #  st.markdown(f"Source: {source.hostname}")
   #      time.sleep(0.005)
      #   st.markdown(f"Link: {source.link}")
-#[st.markdown(i) for i in ["Hi😂", 23, 43, "hdhdb😊"]]
+
 with st.sidebar:
-   # st.subheader("Acess real time response:")
-   '''
-    email= st.text_input("Enter your email")
-    psw=st.text_input("Enter your password", type="password")
-    if os.environ["EMAIL"] and os.environ["PASS"] !=None:
-        st.success("Huggingface login successful.")
-    else:
-        st.error("Huggingface Login required to proceed")
-    websearch=st.checkbox("Web search")
-    st.markdown(" ")
-    st.markdown(" ")
-    st.markdown(" ")
-    '''
     st.markdown("__Developer:__ Wambugu kinyua")
     st.markdown("__Email:__ kenliz1738@gmail.com")
     st.markdown("__Note:__ The app is still in development it might break")
