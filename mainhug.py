@@ -120,7 +120,7 @@ def web_search(prompt):
      #   st.markdown(f"Link: {source.link}")
 #[st.markdown(i) for i in ["Hi😂", 23, 43, "hdhdb😊"]]
 with st.sidebar:
-    st.subheader("Acess real time response:")
+   # st.subheader("Acess real time response:")
    '''
     email= st.text_input("Enter your email")
     psw=st.text_input("Enter your password", type="password")
