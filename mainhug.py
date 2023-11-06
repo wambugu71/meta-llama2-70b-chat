@@ -107,7 +107,7 @@ def web_search(prompt):
 
 #st.markdown("")
 
-websearch: bool = False #to a void an error.
+#websearch: bool = False #to a void an error.
 
 #def webs(res):
  #   for source in res.web_search_sources:
@@ -121,6 +121,8 @@ websearch: bool = False #to a void an error.
      #   st.markdown(f"Link: {source.link}")
 
 with st.sidebar:
+    st.markdown("Access real time response:")
+    websearch = st.checkbox("Web search")
     st.markdown("__Developer:__ Wambugu kinyua")
     st.markdown("__Email:__ kenliz1738@gmail.com")
     st.markdown("__Note:__ The app is still in development it might break")
