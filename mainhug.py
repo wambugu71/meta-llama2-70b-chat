@@ -167,7 +167,7 @@ st.markdown(" `Dev k. WAMBUGU` ")
 # Initialize chat history
 try:
     if "messages" not in st.session_state:
-    st.session_state.messages = [{'role': 'user', 'content': 'how many rows are there?'}]
+    st.session_state.messages = []
     for mgg_no, message in enumerate(st.session_state.messages):
         if  message["role"] =="user":
             msg(message["content"], key =mgg_no, is_user =True, logo ="data.png",allow_html=True, is_table=True)
@@ -188,10 +188,6 @@ try:
                # data = chatbot.query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)['text']
                 assistant_response = web_search(prompt)
                 msg(assistant_response,allow_html=True, is_table=True)
-            
-          #  msg(assistant_response,logo ="./data.png",allow_html=True, is_table=True)
             st.session_state.messages.append({"role": "assistant", "content": assistant_response})
 except:
-   # custom_notification_box(icon='info', textDisplay='Server error, try reprompting again', styles=styles, key ="foo")
     st.error("server error handling your result, reprompt again")#(icon='info', textDisplay='Server error, try reprompting again...', externalLink='more info', url='#', styles=styles, key="foo")
-# Initialize chat history
