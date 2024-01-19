@@ -166,6 +166,7 @@ st.markdown(" `Dev k. WAMBUGU` ")
 #custom_notification_box(icon='info', textDisplay='😂😂🤠We are almost done with your registration...', externalLink='more info', url='#', styles=styles, key="foo")
 # Initialize chat history
 try:
+    prompt =  st.chat_input("Ask your question...")
     if "messages" not in st.session_state:
         st.session_state.messages = []
     for mgg_no, message in enumerate(st.session_state.messages):
