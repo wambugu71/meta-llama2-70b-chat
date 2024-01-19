@@ -148,7 +148,7 @@ with st.sidebar:
     models_all = [i.name for i in  models]
     option = st.selectbox('Choose your preferred model:',models_all,on_change=clear)
     try:
-        idx = my_list.index(option)
+        idx = models_all.index(option)
         mychatbot = chatwithme(idx)
     except ValueError as e:
         print("Desired modelnot  found.")
