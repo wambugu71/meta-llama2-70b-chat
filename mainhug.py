@@ -135,8 +135,16 @@ with st.sidebar:
 #    st.cache_data.clear()
 def clear():
     st.cache_resource.clear()
+@st.cache_data(show_spinner= False)
+def  chat_models():
+    cookie_path_dir = "./cookies_snapshot1"
+    sign = Login(os.environ['EMAIL'], os.environ['PASS'])
+    cookies = sign.loadCookiesFromDir(cookie_path_dir)
+    chat = hugchat.ChatBot(cookies=cookies.get_dict())
+    return chat.get_available_llm_models()
+    
 with st.sidebar:   
-    models = chatbot.get_available_llm_models()
+    models = chat_models()
     models_all = [i.name for i in  models]
     option = st.selectbox('Choose your preferred model:',models_all,on_change=clear)
     try:
