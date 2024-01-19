@@ -134,9 +134,9 @@ with st.sidebar:
 #    st.cache_data.clear()
 def clear():
     st.cache_resource.clear()
-    
-option = st.selectbox('Choose your preferred model:',('Llama-2-70b-chat-hf', 'CodeLlama-34b-Instruct-hf', 'falcon-180B-chat', 'Mistral-7B-Instruct-v0.1'),on_change=clear)
-st.markdown(f'- You selected: _{option}_')
+with st.sidebar:    
+    option = st.selectbox('Choose your preferred model:',('Llama-2-70b-chat-hf', 'CodeLlama-34b-Instruct-hf', 'falcon-180B-chat', 'Mistral-7B-Instruct-v0.1'),on_change=clear)
+#st.markdown(f'using  _{option}_ model')
 if option == 'Llama-2-70b-chat-hf':
     
     chatbot = chatwithme(0)
