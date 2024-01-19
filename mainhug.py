@@ -182,7 +182,7 @@ try:
         #with st.chat_message("user"):
         msg(prompt, is_user =True,logo ="data.png",allow_html=True, is_table=True)
         #with st.chat_message("assistant"):
-        with st.spinner("Analyzing  your  query..."):
+        with st.spinner("Generating  response..."):
             assistant_response = chatbot.query(prompt,temperature= 0.5, max_new_tokens= 4029)['text']#chatbot.chat(prompt)['text']
             if websearch ==False:
                 msg(assistant_response,allow_html=True, is_table=True)# + "▌")
