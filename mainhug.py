@@ -139,7 +139,7 @@ def clear():
 def  chat_models():
     cookie_path_dir = "./cookies_snapshot1"
     sign = Login(os.environ['EMAIL'], os.environ['PASS'])
-    cookies = sign.loadCookiesFromDir(cookie_path_dir)
+    cookies = sign.login()#cookies = sign.loadCookiesFromDir(cookie_path_dir)
     chat = hugchat.ChatBot(cookies=cookies.get_dict())
     return chat.get_available_llm_models()
     
