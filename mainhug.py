@@ -167,7 +167,7 @@ st.markdown(" `Dev k. WAMBUGU` ")
 # Initialize chat history
 try:
     if "messages" not in st.session_state:
-    st.session_state.messages = []
+        st.session_state.messages = []
     for mgg_no, message in enumerate(st.session_state.messages):
         if  message["role"] =="user":
             msg(message["content"], key =mgg_no, is_user =True, logo ="data.png",allow_html=True, is_table=True)
