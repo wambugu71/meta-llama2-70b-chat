@@ -159,15 +159,15 @@ try:
         st.session_state.messages = []
     for mgg_no, message in enumerate(st.session_state.messages):
         if  message["role"] =="user":
-            msg(message["content"], key =mgg_no, is_user =True, logo ="data.png",allow_html=True, is_table=True)
+            msg(message["content"], key =mgg_no, is_user =True,allow_html=True, is_table=True)
         elif message["role"] =="assistant":
-            msg(message["content"], key=mgg_no,logo ="data.png",allow_html=True, is_table=True)
+            msg(message["content"], key=mgg_no,allow_html=True, is_table=True)
         else:
             msg(message["content"],allow_html=True, is_table=True)
     if prompt :
         st.session_state.messages.append({"role": "user", "content": prompt})
         #with st.chat_message("user"):
-        msg(prompt, is_user =True,logo ="data.png",allow_html=True, is_table=True)
+        msg(prompt, is_user =True,allow_html=True, is_table=True)
         #with st.chat_message("assistant"):
         with st.spinner("Generating  response..."):
             assistant_response = mychatbot.query(prompt,temperature= 0.5, max_new_tokens= 4029)['text']#chatbot.chat(prompt)['text']
