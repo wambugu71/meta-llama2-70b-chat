@@ -14,6 +14,7 @@ st.set_page_config(layout = "wide")
 def chatwithme(model):
     email= os.environ["EMAIL"]
     pass_w = os.environ["PASS"]
+    global chatbot
         #chatbot = login(email,pass_w).login()
     sign = Login(email,pass_w)
     cookies = sign.login()
@@ -134,38 +135,16 @@ with st.sidebar:
 #    st.cache_data.clear()
 def clear():
     st.cache_resource.clear()
-with st.sidebar:    
-    option = st.selectbox('Choose your preferred model:',('Llama-2-70b-chat-hf', 'CodeLlama-34b-Instruct-hf', 'falcon-180B-chat', 'Mistral-7B-Instruct-v0.1'),on_change=clear)
-#st.markdown(f'using  _{option}_ model')
-if option == 'Llama-2-70b-chat-hf':
-    
-    chatbot = chatwithme(0)
-    #chatbot.new_conversation(switch_to =True)
-    #chatbot = chatwithme(0)#new_conversation(switch_to =True)
-elif option == "CodeLlama-34b-Instruct-hf":
-   # st.cache_data.clear()
-    chatbot  = chatwithme(1)
-   # chatbot.new_conversation(switch_to =True)#chatbot = chatwithme(1)#chatbot.switch_llm(1)
-    #chatbot.new_conversation(switch_to =True)
-elif option == "falcon-180B-chat":
-    #st.cache_data.clear()
-    chatbot  = chatwithme(2)
-   # chatbot.new_conversation(switch_to =True)#chatbot = chatwithme(2)#chatbot.switch_llm(2)
-    #chatbot.new_conversation(switch_to =True)
-elif option == "Mistral-7B-Instruct-v0.1":
-    #st.cache_data.clear()
-    chatbot  = chatwithme(3)
-   # chatbot.new_conversation(switch_to =True)#chatbot = chatwithme(3)#chatbot.switch_llm(3)
-    #chatbot.new_conversation(switch_to =True)
-else:
-    st.markdown("Model not available!")
-#.query(prompt
-st.markdown(" `Dev k. WAMBUGU` ")
-
-
-
-#custom_notification_box(icon='info', textDisplay='😂😂🤠We are almost done with your registration...', externalLink='more info', url='#', styles=styles, key="foo")
-# Initialize chat history
+with st.sidebar:   
+    models = chatbot.get_available_llm_models()
+    models_all = [i.name for i in  models]
+    option = st.selectbox('Choose your preferred model:',models_all,on_change=clear)
+    try:
+        idx = my_list.index(option)
+        mychatbot = chatwithme(idx)
+    except ValueError as e:
+        print("Desired modelnot  found.")
+        idx = -1
 try:
     prompt =  st.chat_input("Ask your question...")
     if "messages" not in st.session_state:
@@ -183,7 +162,7 @@ try:
         msg(prompt, is_user =True,logo ="data.png",allow_html=True, is_table=True)
         #with st.chat_message("assistant"):
         with st.spinner("Generating  response..."):
-            assistant_response = chatbot.query(prompt,temperature= 0.5, max_new_tokens= 4029)['text']#chatbot.chat(prompt)['text']
+            assistant_response = mychatbot.query(prompt,temperature= 0.5, max_new_tokens= 4029)['text']#chatbot.chat(prompt)['text']
             if websearch ==False:
                 msg(assistant_response,allow_html=True, is_table=True)# + "▌")
             if websearch== True:
