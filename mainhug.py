@@ -189,5 +189,5 @@ try:
                 assistant_response = web_search(prompt)
                 msg(assistant_response,allow_html=True, is_table=True)
             st.session_state.messages.append({"role": "assistant", "content": assistant_response})
-except:
-    st.error("server error handling your result, reprompt again")#(icon='info', textDisplay='Server error, try reprompting again...', externalLink='more info', url='#', styles=styles, key="foo")
+except Exception as  e:
+    st.error("server error handling your result, reprompt again {}".format(e))#(icon='info', textDisplay='Server error, try reprompting again...', externalLink='more info', url='#', styles=styles, key="foo")
