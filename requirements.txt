@@ -7,3 +7,4 @@ langchain
 huggingface_hub
 chromadb
 pysqlite3-binary
+streamlit_chat
