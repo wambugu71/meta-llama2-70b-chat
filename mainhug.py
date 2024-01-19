@@ -2,6 +2,7 @@
 #import sys
 from hugchat import hugchat
 from hugchat.login import Login
+from streamlit_chat import  message as msg
 import os
 import time
 from functools import lru_cache
@@ -160,59 +161,36 @@ else:
 #.query(prompt
 st.markdown(" `Dev k. WAMBUGU` ")
 
-from streamlit_custom_notification_box import custom_notification_box
-styles = {'material-icons':{'color': 'red'},
-          'text-icon-link-close-container': {'box-shadow': '#3896de 0px 8px'},
-          'notification-text': {'':''},
-          'close-button':{'':''},
-          'link':{'':''}}
+
 
 #custom_notification_box(icon='info', textDisplay='😂😂🤠We are almost done with your registration...', externalLink='more info', url='#', styles=styles, key="foo")
 # Initialize chat history
 try:
-#    websearch=st.checkbox("Web search?")
-    #if websearch:
-     #   st.markdown("Web search enabled")
     if "messages" not in st.session_state:
-        st.session_state.messages = []
-    
-    # Display chat messages from history on app rerun
-    for message in st.session_state.messages:
-        with st.chat_message(message["role"]):
-            st.markdown(message["content"])
-    
-    # Accept user input
-    if prompt := st.chat_input("Ask your question?"):
-        # Add user message to chat history
+    st.session_state.messages = [{'role': 'user', 'content': 'how many rows are there?'}]
+    for mgg_no, message in enumerate(st.session_state.messages):
+        if  message["role"] =="user":
+            msg(message["content"], key =mgg_no, is_user =True, logo ="data.png",allow_html=True, is_table=True)
+        elif message["role"] =="assistant":
+            msg(message["content"], key=mgg_no,logo ="data.png",allow_html=True, is_table=True)
+        else:
+            msg(message["content"],allow_html=True, is_table=True)
+    if prompt :
         st.session_state.messages.append({"role": "user", "content": prompt})
-        # Display user message in chat message container
-        with st.chat_message("user"):
-            st.markdown(prompt)
-    
-        # Display assistant response in chat message container
-        with st.chat_message("assistant"):
-            with st.spinner("Generating response..."):
-                message_placeholder = st.empty()
-                full_response = ""
-                assistant_response = chatbot.query(prompt,temperature= 0.5, max_new_tokens= 4029)['text']#chatbot.chat(prompt)['text']
-                # Simulate stream of response with milliseconds delay
-                #with st.spinner(text="Generating response..."):
-               #### for chunk in assistant_response.split():
-                    ###full_response += chunk + " "
-                   ### time.sleep(0.05)
-                    # Add a blinking cursor to simulate typing
-                if websearch ==False:
-                    message_placeholder.markdown(assistant_response)# + "▌")
-                if websearch== True:
-                   # data = chatbot.query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)['text']
-                    assistant_response = web_search(prompt)
-                    message_placeholder.markdown(assistant_response)
-               # message_placeholder.markdown(full_response)
-            # Add assistant response to chat history
-            #st.markdown(
+        #with st.chat_message("user"):
+        msg(prompt, is_user =True,logo ="data.png",allow_html=True, is_table=True)
+        #with st.chat_message("assistant"):
+        with st.spinner("Analyzing  your  query..."):
+            assistant_response = chatbot.query(prompt,temperature= 0.5, max_new_tokens= 4029)['text']#chatbot.chat(prompt)['text']
+            if websearch ==False:
+                msg(assistant_response,allow_html=True, is_table=True)# + "▌")
+            if websearch== True:
+               # data = chatbot.query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)['text']
+                assistant_response = web_search(prompt)
+                msg(assistant_response,allow_html=True, is_table=True)
+            
+          #  msg(assistant_response,logo ="./data.png",allow_html=True, is_table=True)
             st.session_state.messages.append({"role": "assistant", "content": assistant_response})
-           # st.session_state.messages.append()
-        ####
 except:
    # custom_notification_box(icon='info', textDisplay='Server error, try reprompting again', styles=styles, key ="foo")
     st.error("server error handling your result, reprompt again")#(icon='info', textDisplay='Server error, try reprompting again...', externalLink='more info', url='#', styles=styles, key="foo")
