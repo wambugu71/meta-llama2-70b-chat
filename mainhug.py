@@ -9,6 +9,7 @@ from functools import lru_cache
 import streamlit as st
 #import logging
 #logging.basicConfig(level=logging.DEBUG)
+st.set_page_config(layout = "wide")
 @st.cache_resource(show_spinner="Loading the model")#(experimental_allow_widgets=True)
 def chatwithme(model):
     email= os.environ["EMAIL"]
