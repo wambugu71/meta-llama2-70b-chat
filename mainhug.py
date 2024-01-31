@@ -152,7 +152,9 @@ with st.sidebar:
         mychatbot = chatwithme(idx)
     except ValueError as e:
         print("Desired modelnot  found.")
-        idx = -1
+        idx = 0
+        mychatbot = chatwithme(idx)
+        #
 try:
     prompt =  st.chat_input("Ask your question...")
     if "messages" not in st.session_state:
