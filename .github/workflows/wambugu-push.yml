@@ -1,5 +1,4 @@
 name: App Running
-
 on:
   schedule:
     - cron: '0 0 */3 * *'# run
