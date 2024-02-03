@@ -1,0 +1,20 @@
+name: App Running
+
+on:
+  schedule:
+    - cron: '0 0 */3 * *'# run
+permissions:
+  contents: write
+jobs:
+  push-empty-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Create empty commit
+        run: |
+          git config --local user.email "wambugukinyua125@gmail.com"
+          git config --local user.name "Wambugu71"
+          git add --all
+          git commit --allow-empty -m "Empty commit to keep app running"
+          git push origin main 
+          
