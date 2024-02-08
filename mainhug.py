@@ -1,19 +1,13 @@
-#from metallma2wambugu.huglogin import login
-#import sys
-from hugchat import hugchat
-from hugchat.login import Login
-from streamlit_chat import  message as msg
-import os
-import time
-from functools import lru_cache
+from openai import OpenAI
 import streamlit as st
-#import logging
-#logging.basicConfig(level=logging.DEBUG)
+from hugchat import hugchat
+import  os
+from hugchat.login import Login
 st.set_page_config(layout = "wide")
 @st.cache_resource(show_spinner="Loading the model")#(experimental_allow_widgets=True)
 def chatwithme(model):
-    email= os.environ["EMAIL"]
-    pass_w = os.environ["PASS"]
+    email= os.environ["EMAIL"]  #= "kenliz1738@gmail.com"
+    pass_w = os.environ["PASS"] #= "Wambugu71?"
     global chatbot
         #chatbot = login(email,pass_w).login()
     sign = Login(email,pass_w)
@@ -91,7 +85,7 @@ nav a:hover {
 def login_data():
     
     return cookies
-    
+
 st.header("AI-Hub")
 
 def web_search(prompt):
@@ -104,24 +98,6 @@ def web_search(prompt):
     new = [f" - __Source from the web:__ - `Title`:{source.title} - `source`: {source.hostname}  `Link`: {source.link}" for source in res.web_search_sources]
     full_resp = "{} {}".format(res["text"],' '.join(new))
     return full_resp
-               # st.markdown("### Sources on the web:")
-#chatbot = hugchat.ChatBot(cookies=chatwithme().get_dict())#.query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)
-   # return chatbot
-
-#st.markdown("")
-
-#websearch: bool = False #to a void an error.
-
-#def webs(res):
- #   for source in res.web_search_sources:
-      #  return ### Essential sources on the web: Title: {source.title} Source: {source.hostname} Link: {source.link}"#)
-       # message_placeholder.markdown(source.link)
-      #  time.sleep(0.005)
-    #    st.markdown(f"Title: {source.title}")
-    #    time.sleep(0.005)
-      #  st.markdown(f"Source: {source.hostname}")
-  #      time.sleep(0.005)
-     #   st.markdown(f"Link: {source.link}")
 
 with st.sidebar:
     st.markdown("Access real time response:")
@@ -129,10 +105,7 @@ with st.sidebar:
     st.markdown("__Developer:__ Wambugu kinyua")
     st.markdown("__Email:__ kenliz1738@gmail.com")
     st.markdown("__Note:__ The app is still in development it might break")
-#option_label=False
-#on = st.toggle("Enable model switching:")
-#if on:
-#    st.cache_data.clear()
+
 def clear():
     st.cache_resource.clear()
 @st.cache_data(show_spinner= False)
@@ -154,31 +127,32 @@ with st.sidebar:
         print("Desired modelnot  found.")
         idx = 0
         mychatbot = chatwithme(idx)
-        #
-try:
-    prompt =  st.chat_input("Ask your question...")
-    if "messages" not in st.session_state:
-        st.session_state.messages = []
-    for mgg_no, message in enumerate(st.session_state.messages):
-        if  message["role"] =="user":
-            msg(message["content"], key =mgg_no, is_user =True,allow_html=True, is_table=True)
-        elif message["role"] =="assistant":
-            msg(message["content"], key=mgg_no,allow_html=True, is_table=True)
-        else:
-            msg(message["content"],allow_html=True, is_table=True)
-    if prompt :
-        st.session_state.messages.append({"role": "user", "content": prompt})
-        #with st.chat_message("user"):
-        msg(prompt, is_user =True,allow_html=True, is_table=True)
-        #with st.chat_message("assistant"):
-        with st.spinner("Generating  response..."):
-            assistant_response = mychatbot.query(prompt,temperature= 0.5, max_new_tokens= 4029)['text']#chatbot.chat(prompt)['text']
-            if websearch ==False:
-                msg(assistant_response,allow_html=True, is_table=True)# + "▌")
-            if websearch== True:
-               # data = chatbot.query(prompt,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)['text']
-                assistant_response = web_search(prompt)
-                msg(assistant_response,allow_html=True, is_table=True)
-            st.session_state.messages.append({"role": "assistant", "content": assistant_response})
-except Exception as  e:
-    st.error("server error handling your result, reprompt again {}".format(e))#(icon='info', textDisplay='Server error, try reprompting again...', externalLink='more info', url='#', styles=styles, key="foo")
+st.title("Ai Hub")
+def  st_ream(prompt, chatbot):
+    for resp in chatbot.query(
+        prompt,
+        stream=True
+    ):
+        try:
+            yield resp['token']
+        except:
+            pass
+        
+
+#client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
+
+if prompt := st.chat_input("Ask your question"):
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    with st.chat_message("user"):
+        st.markdown(prompt)
+
+    with st.chat_message("assistant"):
+        #if  prompt != None:
+        response = st.write_stream(st_ream(prompt, mychatbot))
+    st.session_state.messages.append({"role": "assistant", "content": response})
