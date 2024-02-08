@@ -2,7 +2,7 @@ import streamlit as st
 from hugchat import hugchat
 import  os
 from hugchat.login import Login
-st.set_page_config(layout = "wide")
+#st.set_page_config(layout = "wide")
 @st.cache_resource(show_spinner="Loading the model")#(experimental_allow_widgets=True)
 def chatwithme(model):
     email= os.environ["EMAIL"]  #= "kenliz1738@gmail.com"
@@ -126,7 +126,7 @@ with st.sidebar:
         print("Desired modelnot  found.")
         idx = 0
         mychatbot = chatwithme(idx)
-st.title("Ai Hub")
+#st.title("Ai Hub")
 def  st_ream(prompt, chatbot):
     for resp in chatbot.query(
         prompt,
