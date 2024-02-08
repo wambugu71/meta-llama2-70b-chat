@@ -1,4 +1,3 @@
-from openai import OpenAI
 import streamlit as st
 from hugchat import hugchat
 import  os
