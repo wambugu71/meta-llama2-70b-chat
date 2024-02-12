@@ -2,7 +2,7 @@ import streamlit as st
 from hugchat import hugchat
 import  os
 from hugchat.login import Login
-st.set_page_config(layout = "wide", title  = "Wambugu Ai")
+st.set_page_config(layout = "wide", page_title  = "Wambugu Ai")
 @st.cache_resource(show_spinner="Loading the model")#(experimental_allow_widgets=True)
 def chatwithme(model):
     email= os.environ["EMAIL"]  #= "kenliz1738@gmail.com"
