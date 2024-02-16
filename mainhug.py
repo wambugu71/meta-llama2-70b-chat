@@ -2,7 +2,7 @@ import streamlit as st
 from hugchat import hugchat
 import  os
 from hugchat.login import Login
-st.set_page_config(layout = "wide", page_title  = "Wambugu Ai", initial_sidebar_state="expanded", )#page_icon = "logo_trial.png")
+st.set_page_config(layout = "wide", page_title  = "Wambugu Ai", initial_sidebar_state="expanded", page_icon = "logo_trial.png")
 email= os.environ["EMAIL"]  = "kenliz1738@gmail.com"
 pass_w = os.environ["PASS"] = "Wambugu71?"
 @st.cache_resource(show_spinner="Loading the model")#(experimental_allow_widgets=True)
