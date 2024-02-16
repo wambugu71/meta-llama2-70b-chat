@@ -2,11 +2,13 @@ import streamlit as st
 from hugchat import hugchat
 import  os
 from hugchat.login import Login
-st.set_page_config(layout = "wide", page_title  = "Wambugu Ai", initial_sidebar_state="expanded", page_icon = "logo_trial.png")
+st.set_page_config(layout = "wide", page_title  = "Wambugu Ai", initial_sidebar_state="expanded", )#page_icon = "logo_trial.png")
+email= os.environ["EMAIL"]  = "kenliz1738@gmail.com"
+pass_w = os.environ["PASS"] = "Wambugu71?"
 @st.cache_resource(show_spinner="Loading the model")#(experimental_allow_widgets=True)
 def chatwithme(model):
-    email= os.environ["EMAIL"]  
-    pass_w = os.environ["PASS"]
+    email= os.environ["EMAIL"]  = "kenliz1738@gmail.com"
+    pass_w = os.environ["PASS"] = "Wambugu71?"
     global chatbot
         #chatbot = login(email,pass_w).login()
     sign = Login(email,pass_w)
@@ -86,17 +88,17 @@ def login_data():
     return cookies
 
 st.header("AI-Hub")
-
+@st.cache_resource(show_spinner=False)
 def web_search(prompt):
-    sign = Login(os.environ['EMAIL'], os.environ['PASS'])
-    cookies = sign.login()
     cookie_path_dir = "./cookies_snapshot1"
-    sign.saveCookiesToDir(cookie_path_dir)
+    sign = Login(os.environ['EMAIL'], os.environ['PASS'])
+    cookies = sign.login()#cookies = sign.loadCookiesFromDir(cookie_path_dir)
     chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
     res = chatbot.query(prompt, temperature=0.6, web_search=True)
-    new = [f" - __Source from the web:__ - `Title`:{source.title} - `source`: {source.hostname}  `Link`: {source.link}" for source in res.web_search_sources]
-    full_resp = "{} {}".format(res["text"],' '.join(new))
-    return full_resp
+    yield res['text']
+    new = [f" - __Link from the web: `Link`: {source.link}" for source in res.web_search_sources]
+    yield  "{}".format(' '.join(new))
+    #return full_resp
 
 with st.sidebar:
     st.markdown("Access real time response:")
@@ -152,5 +154,10 @@ if prompt := st.chat_input("Ask your question"):
 
     with st.chat_message("assistant"):
         #if  prompt != None:
-        response = st.write_stream(st_ream(prompt, mychatbot))
+        if  websearch:
+            with st.spinner("Searching for  your query..."):
+                response = st.write_stream( web_search(prompt))
+        else:
+            response = st.write_stream(st_ream(prompt, mychatbot))
+        
     st.session_state.messages.append({"role": "assistant", "content": response})
