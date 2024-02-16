@@ -5,8 +5,8 @@ from hugchat.login import Login
 st.set_page_config(layout = "wide", page_title  = "Wambugu Ai", initial_sidebar_state="expanded", page_icon = "logo_trial.png")
 @st.cache_resource(show_spinner="Loading the model")#(experimental_allow_widgets=True)
 def chatwithme(model):
-    email= os.environ["EMAIL"]  #= "kenliz1738@gmail.com"
-    pass_w = os.environ["PASS"] #= "Wambugu71?"
+    email= os.environ["EMAIL"]  
+    pass_w = os.environ["PASS"]
     global chatbot
         #chatbot = login(email,pass_w).login()
     sign = Login(email,pass_w)
