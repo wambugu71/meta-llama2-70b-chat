@@ -118,7 +118,8 @@ def  chat_models():
 with st.sidebar:   
     models = chat_models()
     models_all = [i.name for i in  models]
-    option = st.selectbox('Choose your preferred model:',models_all,on_change=clear)
+    with st.container(border=True, height =100):
+        option = st.radio('Choose your preferred model:',models_all,on_change=clear)
     syspromptfromuser = st.text_area(label = "System prompt",
     placeholder = "Define  what role should  it  do or expert in what 'field'.",
     )
