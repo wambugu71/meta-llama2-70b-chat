@@ -2,7 +2,7 @@ import streamlit as st
 from hugchat import hugchat
 import  os
 from hugchat.login import Login
-st.set_page_config(layout = "wide", page_title  = "Wambugu Ai", initial_sidebar_state="expanded", page_icon = "logo_trial.png")
+st.set_page_config(layout = "wide", page_title  = "OmniHelper", initial_sidebar_state="expanded", page_icon = "logo_trial.png")
 email= os.environ["EMAIL"] 
 pass_w = os.environ["PASS"]
 @st.cache_resource(show_spinner="Loading the model")#(experimental_allow_widgets=True)
@@ -20,7 +20,7 @@ def chatwithme(model, sysprompt):
     chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
 #,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)
     chatbot.switch_llm(model)
-    chatbot.new_conversation(switch_to =True, system_prompt=f"Your name is 'Wambugu kinyua AI' assistant, complete      q    ueries  as  asked'+ {sysprompt}")
+    chatbot.new_conversation(switch_to =True, system_prompt=f"Your name is 'Wambugu kinyua AI' assistant,your role is : '+ {sysprompt}")
     return chatbot
    # if os.environ["EMAIL"] or os.environ["PASS"] ==None:
    #     st.error("Huggingface Login required!")
@@ -87,7 +87,7 @@ def login_data():
     
     return cookies
 
-st.header("AI-Hub")
+st.header("OmniHelper")
 @st.cache_resource(show_spinner=False)
 def web_search(prompt):
     cookie_path_dir = "./cookies_snapshot1"
@@ -152,7 +152,7 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-if prompt := st.chat_input("Ask your question"):
+if prompt := st.chat_input("Ask your query"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
