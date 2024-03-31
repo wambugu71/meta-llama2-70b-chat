@@ -6,7 +6,7 @@ st.set_page_config(layout = "wide", page_title  = "Wambugu Ai", initial_sidebar_
 email= os.environ["EMAIL"] 
 pass_w = os.environ["PASS"]
 @st.cache_resource(show_spinner="Loading the model")#(experimental_allow_widgets=True)
-def chatwithme(model):
+def chatwithme(model, sysprompt):
     email= os.environ["EMAIL"] 
     pass_w = os.environ["PASS"] 
     global chatbot
@@ -20,7 +20,7 @@ def chatwithme(model):
     chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
 #,temperature= 0.5, max_new_tokens= 4029, web_search=True)#chatbot.chat(prompt)
     chatbot.switch_llm(model)
-    chatbot.new_conversation(switch_to =True, system_prompt="Your name is 'Wambugu kinyua AI', If you are greeted with hello, hey, how are you, etc your reply must have  'Hello welcome to Wambugu kinyua AI assistant, ask anything...'")
+    chatbot.new_conversation(switch_to =True, system_prompt=f"Your name is 'Wambugu kinyua AI' assistant, complete      q    ueries  as  asked'+ {sysprompt}")
     return chatbot
    # if os.environ["EMAIL"] or os.environ["PASS"] ==None:
    #     st.error("Huggingface Login required!")
@@ -121,13 +121,16 @@ with st.sidebar:
     models = chat_models()
     models_all = [i.name for i in  models]
     option = st.selectbox('Choose your preferred model:',models_all,on_change=clear)
+    syspromptfromuser = st.text_area(label = "System prompt",
+    placeholder = "Define  what role should  it  do or expert in what 'field'.",
+    )
     try:
         idx = models_all.index(option)
-        mychatbot = chatwithme(idx)
+        mychatbot = chatwithme(idx,syspromptfromuser )
     except ValueError as e:
         print("Desired modelnot  found.")
         idx = 0
-        mychatbot = chatwithme(idx)
+        mychatbot = chatwithme(idx, syspromptfromuser)
 #st.title("Ai Hub")
 def  st_ream(prompt, chatbot):
     for resp in chatbot.query(
