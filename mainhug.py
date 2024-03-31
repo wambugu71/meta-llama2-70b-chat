@@ -101,11 +101,9 @@ def web_search(prompt):
     #return full_resp
 
 with st.sidebar:
-    st.markdown("Access real time response:")
-    websearch = st.checkbox("Web search")
-    st.markdown("__Developer:__ Wambugu kinyua")
-    st.markdown("__Email:__ kenliz1738@gmail.com")
-    st.markdown("__Note:__ The app is still in development it might break")
+    with st.expander("Realtime  results", expanded =False):
+        st.markdown("Access real time response:")
+        websearch = st.checkbox("Web search")
 
 def clear():
     st.cache_resource.clear()
@@ -124,6 +122,9 @@ with st.sidebar:
     syspromptfromuser = st.text_area(label = "System prompt",
     placeholder = "Define  what role should  it  do or expert in what 'field'.",
     )
+    st.markdown("__Developer:__ Wambugu kinyua")
+    st.markdown("__Email:__ kenliz1738@gmail.com")
+    st.markdown("__Note:__ The app is still in development it might break")
     try:
         idx = models_all.index(option)
         mychatbot = chatwithme(idx,syspromptfromuser )
