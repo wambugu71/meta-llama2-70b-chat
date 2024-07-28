@@ -135,14 +135,6 @@ with st.sidebar:
         idx = 0
         mychatbot = chatwithme(idx, syspromptfromuser)
 #st.title("Ai Hub")
-def  st_ream(prompt, chatbot):
-    for resp in chatbot.chat(
-        prompt,
-    ):
-        try:
-            yield resp['token']
-        except:
-            pass
 
         
 if "messages" not in st.session_state:
@@ -163,6 +155,15 @@ if prompt := st.chat_input("Ask your query"):
             with st.spinner("Searching for  your query..."):
                 response = st.write_stream( web_search(prompt))
         else:
+            @st.fragment
+            def  st_ream(prompt, chatbot):
+                for resp in chatbot.chat(
+                    prompt,
+                ):
+                    try:
+                        yield resp['token']
+                    except:
+                        pass
             response = st.write_stream(st_ream(prompt, mychatbot))
         
     st.session_state.messages.append({"role": "assistant", "content": response})
