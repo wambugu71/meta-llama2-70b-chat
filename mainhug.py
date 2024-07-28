@@ -164,6 +164,6 @@ if prompt := st.chat_input("Ask your query"):
             with st.spinner("Searching for  your query..."):
                 response = st.write_stream( web_search(prompt))
         else:
-            response = st.write_stream(mychatbot.query(prompt,stream=True))#st_ream(prompt, mychatbot))
+            response = st.write_stream(mychatbot.chat(prompt))#st_ream(prompt, mychatbot))
         
     st.session_state.messages.append({"role": "assistant", "content": response})
